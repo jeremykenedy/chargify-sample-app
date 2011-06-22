@@ -1,0 +1,92 @@
+<h2>Cancel Subscription</h2>
+
+<table class="vertical">
+  <tbody>
+    <tr>
+      <th>Customer</th>
+      <td>
+        <a href="/customers/read/customer-id/<?php echo $this->sub['customer']['id'] ?>"><?php echo $this->sub['customer']['first_name'] ?> <?php echo $this->sub['customer']['last_name'] ?></a>
+        <?php echo !empty($this->sub['customer']['organization']) ? ' <span class="subtle">(' . $this->sub['customer']['organization'] . ')</span>' : ''; ?>
+      </td>
+    </tr>
+    <tr>
+      <th>Product</th>
+      <td>
+        (<?php echo $this->sub['product']['product_family']['name'] ?>) <?php echo $this->sub['product']['name'] ?>
+      </td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td class="subscription_status">
+        <?php echo $this->subscriptionState($this->sub['state']) ?>
+      </td>
+    </tr>
+    <tr>
+      <th>Credit Card</th>
+      <td>
+        <?php if (!empty($this->sub['credit_card'])): ?>
+          <?php echo $this->sub['credit_card']['masked_card_number'] ?> <?php echo $this->sub['credit_card']['card_type'] ?> (exp. <?php echo $this->sub['credit_card']['expiration_month'] ?>/<?php echo $this->sub['credit_card']['expiration_year'] ?>)
+        <?php endif; ?>
+      </td>
+    </tr>
+    <tr>
+      <th>Price</th>
+      <td>
+        $<?php echo number_format($this->sub['product']['price_in_cents'] / 100, 2) ?> every <?php echo $this->sub['product']['interval'] ?> <?php echo $this->sub['product']['interval_unit'] ?>
+      </td>
+    </tr>
+    <tr>
+      <th>Signed Up At</th>
+      <td><?php echo date('m/d/Y', strtotime($this->sub['created_at'])) ?></td>
+    </tr>
+    <tr>
+      <th>Trial Expires At</th>
+      <td>
+        <?php if (!empty($this->sub['trial_ended_at'])): ?>
+          <?php echo date('m/d/Y', strtotime($this->sub['trial_ended_at'])) ?>
+        <?php endif; ?>
+      </td>
+    </tr>
+    <tr>
+      <th>Activated At</th>
+      <td>
+        <?php if (!empty($this->sub['activated_at'])): ?>
+          <?php echo date('m/d/Y', strtotime($this->sub['activated_at'])) ?>
+        <?php endif; ?>
+      </td>
+    </tr>
+    <tr>
+      <th>Next Billing</th>
+      <td>
+        <?php echo date('m/d/y h:iA T', strtotime($this->sub['next_assessment_at'])) ?>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<h2>To Cancel This Subscription:</h2>
+<p>Enter an optional cancellation reason/message below, then press a Cancelation button below.</p>
+<form method="post" class="edit_subscription" action="">
+  <div>
+    <textarea style="width: 100%;" rows="3" name="subscription[cancellation_message]" id="subscription_cancellation_message" cols="40"></textarea>
+  </div>
+  <p><strong>What's going to happen?</strong></p>
+  <ul class="bulleted">
+    <li>The customer's credit card will no longer be charged after cancelation takes effect</li>
+    <li>Cancelation takes effect immediately if you press &quot;Cancel Immediately&quot;</li>
+    <li>Cancelation takes effect around <?php echo date('m/d/Y h:i A T', strtotime($this->sub['next_assessment_at'])) ?> if you press &quot;Cancel at End of Period&quot;</li>
+    <li>No refunds or prorations will be made.</li>
+    <li>No email is sent to your customer.</li>
+    <li>Canceled subscription can be reactivated at a later date</li>
+  </ul>
+  
+  <p>
+    <input type="submit" value="Cancel Immediately" name="cancel_immediately">
+    <input type="submit" value="Cancel at End of Period" name="cancel_delayed">
+    or
+    <a href="/subscriptions/read/subscription-id/<?php echo $this->sub['id'] ?>">Go back</a>
+  </p>
+</form>

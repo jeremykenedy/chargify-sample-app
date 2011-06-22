@@ -1,0 +1,96 @@
+<div class="customers">
+
+  <h1 class="page-title">Customer Account</h1>
+  <a class="app-main-button edit_button" href="/customers/edit/customer-id/<?php echo $this->cust['id'] ?>">Edit Customer</a>
+  <h2><?php echo $this->cust['first_name'] ?> <?php echo $this->cust['last_name'] ?> <?php if (!empty($this->cust['organization'])): ?>(<?php echo $this->cust['organization'] ?>)<?php endif; ?></h2>
+  <table class="vertical">
+    <tbody>
+      <tr>
+        <th>
+          ID
+        </th>
+        <td>
+          <?php echo $this->cust['id'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Email
+        </th>
+        <td>
+          <a href="mailto:<?php echo $this->cust['email'] ?>"><?php echo $this->cust['email'] ?></a>
+        </td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+        <td><?php echo $this->cust['phone'] ?></td>
+      </tr>
+      <tr>
+        <th>
+          Organization
+        </th>
+        <td>
+          <?php echo $this->cust['organization'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Reference ID (Your App)
+        </th>
+        <td>
+          <?php echo $this->cust['reference'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Customer Since
+        </th>
+        <td>
+          <?php echo $this->cust['created_at'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Subscriptions/Purchases
+        </th>
+        <td>
+          <ul>
+            <?php foreach ($this->subs as $sub): ?>
+              <li>
+                <a href="/subscriptions/read/subscription-id/<?php echo $sub['id'] ?>">(<?php echo $sub['product']['product_family']['name'] ?>) <?php echo $sub['product']['name'] ?></a> 
+                <span class="subtle">(<?php echo $sub['state'] ?>)</span>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Shipping Address</th>
+        <td>
+          <?php echo !empty($this->cust['address'])   ? $this->cust['address']   . '<br />' : ''; ?>
+          <?php echo !empty($this->cust['address_2']) ? $this->cust['address_2'] . '<br />' : ''; ?>
+          <?php echo !empty($this->cust['city'])      ? $this->cust['city']      . ', '     : ''; ?>
+          <?php echo !empty($this->cust['state'])     ? $this->cust['state']     . ', '     : ''; ?>
+          <?php echo !empty($this->cust['zip'])       ? $this->cust['zip']                  : ''; ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Credit Cards</th>
+        <td>
+          <?php foreach ($this->subs as $sub): ?>
+            <?php if (!empty($sub['credit_card'])): ?>
+              <?php echo $sub['credit_card']['first_name'] ?> <?php echo $sub['credit_card']['last_name'] ?><br />
+              <?php echo $sub['credit_card']['masked_card_number'] ?> exp. <?php echo $sub['credit_card']['expiration_month'] ?>/<?php echo $sub['credit_card']['expiration_year'] ?><br />
+              <?php echo $sub['credit_card']['billing_address'] ?><br />
+              <?php echo $sub['credit_card']['billing_city'] ?>, <?php echo $sub['credit_card']['billing_state'] ?> <?php echo $sub['credit_card']['billing_zip'] ?><br />
+              <?php echo $sub['credit_card']['billing_country'] ?>
+              <hr />
+            <?php endif; ?>
+          <?php endforeach; ?>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a class="return-link" href="/customers/list">« Return to Customers List</a>
+  
+</div> <!-- /customers -->

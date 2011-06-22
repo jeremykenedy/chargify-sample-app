@@ -1,0 +1,11 @@
+<ul id="app_navigation">
+    <li class="<?php echo $this->currentTab('dashboard') ?>"><a href="/"><span>Dashboard</span></a></li>
+    <li class="<?php echo $this->currentTab('products') ?>"><a href="/products/list"><span>Products</span></a></li>
+    <li class="<?php echo $this->currentTab('subscriptions') ?>"><a href="/subscriptions/list"><span>Subscriptions</span></a></li>
+    <li class="<?php echo $this->currentTab('transactions') ?>"><a href="/transactions/for-site?page=1&per_page=20&kinds[]=charge&kinds[]=info&kinds[]=refund&kinds[]=payment&kinds[]=credit&kinds[]=payment_authorization&kinds[]=adjustment"><span>Transactions</span></a></li>
+    <li class="<?php echo $this->currentTab('customers') ?>"><a href="/customers/list"><span>Customers</span></a></li>
+    <li class="<?php echo $this->currentTab('logs') ?>"><a href="/logs"><span>Logs</span></a></li>
+    <?php if (is_dir(dirname(APPLICATION_PATH) . '/www/docs')): ?>
+      <li><a target="_blank" href="/docs"><span>DocBlox</span></a></li>
+    <?php endif; ?>
+</ul>

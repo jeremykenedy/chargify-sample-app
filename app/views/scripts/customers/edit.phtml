@@ -1,0 +1,70 @@
+<div class="customers">
+
+  <h1 id="customers-title" class="page-title">Edit Customer</h1>
+  
+  <p class="app-instruction">Fields marked * are required.</p>
+  <form method="post" id="edit_customer_410152" class="edit_customer" action="">
+    <p>
+      <label for="customer_first_name">First Name *</label>
+      <input type="text" value="<?php echo $this->cust['first_name'] ?>" size="30" name="customer[first_name]" id="customer_first_name" class="title span-16">
+    </p>
+    <p>
+      <label for="customer_last_name">Last Name *</label>
+      <input type="text" value="<?php echo $this->cust['last_name'] ?>" size="30" name="customer[last_name]" id="customer_last_name" class="title span-16">
+    </p>
+    <p>
+      <label for="customer_email">Email *</label>
+      <input type="text" value="<?php echo $this->cust['email'] ?>" size="30" name="customer[email]" id="customer_email" class="title span-16">
+    </p>
+    <p>
+      <label for="customer_organization">Organization/Company</label>
+      <input type="text" value="<?php echo $this->cust['organization'] ?>" size="30" name="customer[organization]" id="customer_organization" class="title span-16">
+    </p>
+    <p>
+      <label for="customer_phone">Phone</label>
+      <input type="text" value="<?php echo $this->cust['phone'] ?>" size="30" name="customer[phone]" id="customer_phone" class="title span-16">
+    </p>
+    <p>
+      <label for="customer_reference">Reference ID (unique value in your app)</label>
+      <input type="text" value="<?php echo $this->cust['reference'] ?>" size="30" name="customer[reference]" id="customer_reference" class="title span-16">
+    </p>
+    <p>
+      <label for="customer_address">Shipping Address 1</label>
+      <input type="text" value="<?php echo $this->cust['address'] ?>" size="30" name="customer[address]" id="customer_address">
+    </p>
+    <p>
+      <label for="customer_address_2">Shipping Address 2</label>
+      <input type="text" value="<?php echo $this->cust['address_2'] ?>" size="30" name="customer[address_2]" id="customer_address_2">
+    </p>
+    <p>
+      <label for="customer_country">Shipping Country</label>
+      <select rel="customer_state" name="customer[country]" id="customer_country" class="country_select">
+        <?php foreach ($this->countries as $code => $name): ?>
+          <option value="<?php echo $code ?>"<?php echo ($code == $this->cust['country']) ? ' selected="selected"' : ''; ?>><?php echo $name ?></option>
+        <?php endforeach; ?>
+      </select>
+    </p>
+    <p>
+      <label for="customer_state">Shipping State</label>
+      <select name="customer[state]" id="customer_state">
+        <?php foreach ($this->states as $code => $name): ?>
+          <option value="<?php echo $code ?>"<?php echo ($code == $this->cust['state']) ? ' selected="selected"' : ''; ?>><?php echo $name ?></option>
+        <?php endforeach; ?>
+      </select>
+    </p>
+    <p>
+      <label for="customer_city">Shipping City</label>
+      <input type="text" value="<?php echo $this->cust['city'] ?>" size="30" name="customer[city]" id="customer_city">
+    </p>
+    <p>
+      <label for="customer_zip">Shipping Zip Code</label>
+      <input type="text" value="<?php echo $this->cust['zip'] ?>" size="30" name="customer[zip]" id="customer_zip">
+    </p>
+    <p class="app-form-submit">
+      <input type="submit" value="Save Changes" name="commit" id="customer_submit" class="app-submit-button">
+      or
+      <a href="/customers/read/customer-id/<?php echo $this->cust['id'] ?>">Cancel</a>
+    </p>
+  </form>
+ 
+</div> <!-- /customers -->

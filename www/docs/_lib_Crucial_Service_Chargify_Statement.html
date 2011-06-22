@@ -1,0 +1,272 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">lib/Crucial/Service/Chargify/Statement.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>category</dt>
+<dd>Crucial</dd>
+<dt>copyright</dt>
+<dd>Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)</dd>
+<dt>license</dt>
+<dd>New BSD License</dd>
+<dt>link</dt>
+<dd>http://www.crucialwebstudio.com</dd>
+<dt>package</dt>
+<dd>Crucial_Service_Chargify</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CCrucial_Service_Chargify_Statement">Crucial_Service_Chargify_Statement</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">Chargify Sample App</p>
+<div class="long-description"><p>LICENSE</p>
+
+<p>This source file is subject to the new BSD license that is bundled
+with this package in the file LICENSE.txt.</p>
+
+<p>If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to dan@crucialwebstudio.com so we can send you a copy immediately.</p>
+</div>
+<a name="classes"></a><a id="\Crucial_Service_Chargify_Statement"></a><h2 class="class">\Crucial_Service_Chargify_Statement<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_lib_Crucial_Service_Chargify_Abstract.html#%5CCrucial_Service_Chargify_Abstract">\Crucial_Service_Chargify_Abstract</a></dd>
+<dt>category</dt>
+<dd>Crucial</dd>
+<dt>copyright</dt>
+<dd>Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)</dd>
+<dt>license</dt>
+<dd>New BSD License</dd>
+<dt>link</dt>
+<dd>http://www.crucialwebstudio.com</dd>
+<dt>package</dt>
+<dd>Crucial_Service_Chargify</dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Statement::setPage()">setPage</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Statement::listStatements()">listStatements</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Statement::read()">read</a></dd>
+<dd><a class="method protected" href="#%5CCrucial_Service_Chargify_Statement::_normalizeResponseArray()">_normalizeResponseArray</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Chargify Sample App</p>
+<div class="long-description"><p>LICENSE</p>
+
+<p>This source file is subject to the new BSD license that is bundled
+with this package in the file LICENSE.txt.</p>
+
+<p>If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to dan@crucialwebstudio.com so we can send you a copy immediately.</p>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Crucial_Service_Chargify_Statement::_normalizeResponseArray()"></a><h4 class="method protected">_normalizeResponseArray<div class="to-top"><a href="#Crucial_Service_Chargify_Statement">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_normalizeResponseArray</span><span class="nb-faded-text">(
+          \array $responseArray
+          )
+        </span>
+        :
+        \array</code><p class="short-description">When returning multiple products the array is different depending on which
+format (xml/json) you are using. This normalizes the array for us so we can
+rely on a consistent structure.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$responseArray</dt>
+<dd>\array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Statement::listStatements()"></a><h4 class="method public">listStatements<div class="to-top"><a href="#Crucial_Service_Chargify_Statement">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">listStatements</span><span class="nb-faded-text">(
+          \int $subscriptionId
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Statement.html#%5CCrucial_Service_Chargify_Statement">\Crucial_Service_Chargify_Statement</a></code><p class="short-description">Enter description here...</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$subscriptionId</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Statement.html#%5CCrucial_Service_Chargify_Statement">\Crucial_Service_Chargify_Statement</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Statement::setPage()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Statement::read()"></a><h4 class="method public">read<div class="to-top"><a href="#Crucial_Service_Chargify_Statement">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">read</span><span class="nb-faded-text">(
+          \int $statementId
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Statement.html#%5CCrucial_Service_Chargify_Statement">\Crucial_Service_Chargify_Statement</a></code><p class="short-description">Read a statemtn via Chargify Statemtent ID</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$statementId</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Statement.html#%5CCrucial_Service_Chargify_Statement">\Crucial_Service_Chargify_Statement</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Statement::setPage()"></a><h4 class="method public">setPage<div class="to-top"><a href="#Crucial_Service_Chargify_Statement">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setPage</span><span class="nb-faded-text">(
+          \int $page
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Statement.html#%5CCrucial_Service_Chargify_Statement">\Crucial_Service_Chargify_Statement</a></code><p class="short-description">Enter description here...</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$page</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Statement.html#%5CCrucial_Service_Chargify_Statement">\Crucial_Service_Chargify_Statement</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.0</a>.
+    </small></body></html>

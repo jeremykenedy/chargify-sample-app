@@ -1,0 +1,25 @@
+<VirtualHost *:80>
+  
+  SetEnv APPLICATION_ENV development
+  AddDefaultCharset utf-8
+  
+  <Directory "{APP_PATH}/www">
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} -s [OR]
+    RewriteCond %{REQUEST_FILENAME} -l [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^.*$ - [NC,L]
+    RewriteRule ^.*$ index.php [NC,L]
+  </Directory>
+  
+  DocumentRoot {APP_PATH}/www
+  
+  # Change chargify.dev to your domain name. We HIGHLY recommend that 
+  # you only run this app on a local development environment. It is not 
+  # intended to be run on the public internet. You've been warned.
+  ServerName chargify.dev
+  
+  ErrorLog ${APACHE_LOG_ROOT}/chargify.dev/error.log
+  CustomLog ${APACHE_LOG_ROOT}/chargify.dev/access.log common
+
+</VirtualHost>

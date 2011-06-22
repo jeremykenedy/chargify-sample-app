@@ -1,0 +1,13 @@
+0.1-beta, 2011-06-19
+--------------------
+- Initial release
+
+- Zend Framework Version: 1.11.7
+- State of Zend_Service_Chargify: Unofficial
+
+0.2-beta, 2011-06-21
+--------------------
+- Removed Chargify logos and favicon.
+
+- Zend Framework Version: 1.11.7
+- State of Zend_Service_Chargify: Unofficial

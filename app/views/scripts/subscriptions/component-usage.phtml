@@ -1,0 +1,24 @@
+<h2>Record usage for &quot;<?php echo $this->comp['name'] ?>&quot;</h2>
+
+<p>All recorded usage for a billing period will be tallied and charged at the 
+end of the period.</p>
+
+<form method="post" id="new_usage" class="formtastic usage" action="">
+  <fieldset class="inputs">
+    <ol>
+      <li id="usage_quantity_input" class="numeric required">
+      <label for="usage_quantity">Quantity<abbr title="required">*</abbr></label>
+      <input type="text" size="50" name="usage[quantity]" id="usage_quantity">
+    </li>
+    <li id="usage_memo_input" class="text optional">
+      <label for="usage_memo">Memo</label>
+      <textarea rows="4" name="usage[memo]" id="usage_memo" cols="40"></textarea>
+      <p class="inline-hints">Add a note to describe this usage</p>
+    </li>
+  </ol>
+</fieldset>
+  
+  <input type="submit" value="Record" name="commit" id="record_usage_button" class="app-submit-button">
+  or
+  <a href="/subscriptions/list-components/subscription-id/<?php echo $this->sub['id'] ?>">Cancel</a>
+</form>

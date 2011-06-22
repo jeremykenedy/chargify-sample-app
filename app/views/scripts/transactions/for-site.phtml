@@ -1,0 +1,36 @@
+<div id="transactions-pane" class="pane" style="display: block;">
+  <h1>Transactions for Site</h1>
+  
+  <table id="account_transactions">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Memo</th>
+        <th>Amount</th>
+        <th>Balance</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($this->trans as $trans): ?>
+        <tr class="<?php echo $trans['transaction_type'] ?> <?php echo $this->cycle(array("odd", "even"))->next() ?>">
+          <td><?php echo $trans['id'] ?></td>
+          <?php
+          $timeStamp = strtotime($trans['created_at']);
+          $dateFormatted = date('m/d/Y', $timeStamp);
+          $timeFormatted = date('h:i A', $timeStamp);
+          ?>
+          <td><?php echo $dateFormatted ?><br /><?php echo $timeFormatted ?></td>
+          <td><?php echo $this->escape($trans['type']) ?></td>
+          <td><?php echo $this->escape($trans['memo']) ?></td>
+          <td>$<?php echo number_format($trans['amount_in_cents']/100, 2) ?></td>
+          <td>$<?php echo number_format($trans['ending_balance_in_cents']/100, 2) ?></td>
+          <td><?php if ($trans['success']): ?>Successful<?php endif; ?></td>
+        </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+  
+</div>

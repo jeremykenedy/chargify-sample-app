@@ -1,0 +1,19 @@
+[GLOBAL]
+
+; xml or json
+format = "json"
+;format = "xml"
+
+; http client configuration
+http.maxredirects = 0
+http.timeout = 30
+http.useragent = "Zend_Service_Chargify"
+http.keepalive = true
+
+[development : GLOBAL]
+
+api_key = "your api key here"
+hostname = "yourhostname.chargify.com"
+; password is always 'x' so it is not needed in child sections of this config
+password = "x"
+shared_key = "your shared key"

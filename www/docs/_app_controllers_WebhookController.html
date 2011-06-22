@@ -1,0 +1,457 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">app/controllers/WebhookController.php</h1>
+<div class="file_menu">
+<a href="#includes">Includes</a> <a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>category</dt>
+<dd>App</dd>
+<dt>copyright</dt>
+<dd>Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)</dd>
+<dt>license</dt>
+<dd>New BSD License</dd>
+<dt>package</dt>
+<dd>Controllers</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CWebhookController">WebhookController</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">Handles webhooks from Chargify</p>
+<div class="long-description"><p>Webhooks will be logged to the /tmp/webhooks directory. Make sure it is
+writable by the web server.</p>
+
+<p>LICENSE</p>
+
+<p>This source file is subject to the new BSD license that is bundled
+with this package in the file LICENSE.txt.</p>
+
+<p>If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to dan@crucialwebstudio.com so we can send you a copy immediately.</p>
+</div>
+<a name="classes"></a><a id="\WebhookController"></a><h2 class="class">\WebhookController<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_app_controllers_ChargifyController.html#%5CChargifyController">\ChargifyController</a></dd>
+<dt>category</dt>
+<dd>App</dd>
+<dt>copyright</dt>
+<dd>Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)</dd>
+<dt>license</dt>
+<dd>New BSD License</dd>
+<dt>package</dt>
+<dd>Controllers</dd>
+<dt>Properties</dt>
+<dd><a class="property protected" href="#%5CWebhookController::%24_isLoggable">$_isLoggable</a></dd>
+<dd><a class="property protected" href="#%5CWebhookController::%24_handle">$_handle</a></dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CWebhookController::handleAction()">handleAction</a></dd>
+<dd><a class="method protected" href="#%5CWebhookController::_isValid()">_isValid</a></dd>
+<dd><a class="method protected" href="#%5CWebhookController::_handleSignupSuccess()">_handleSignupSuccess</a></dd>
+<dd><a class="method protected" href="#%5CWebhookController::_handleSignupFailure()">_handleSignupFailure</a></dd>
+<dd><a class="method protected" href="#%5CWebhookController::_handleRenewalSuccess()">_handleRenewalSuccess</a></dd>
+<dd><a class="method protected" href="#%5CWebhookController::_handleRenewalFailure()">_handleRenewalFailure</a></dd>
+<dd><a class="method protected" href="#%5CWebhookController::_handlePaymentSuccess()">_handlePaymentSuccess</a></dd>
+<dd><a class="method protected" href="#%5CWebhookController::_handlePaymentFailure()">_handlePaymentFailure</a></dd>
+<dd><a class="method protected" href="#%5CWebhookController::_handleBillingDateChange()">_handleBillingDateChange</a></dd>
+<dd><a class="method protected" href="#%5CWebhookController::_handleSubscriptionStateChange()">_handleSubscriptionStateChange</a></dd>
+<dd><a class="method protected" href="#%5CWebhookController::_handleExpiringCard()">_handleExpiringCard</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Handles webhooks from Chargify</p>
+<div class="long-description"><p>Webhooks will be logged to the /tmp/webhooks directory. Make sure it is
+writable by the web server.</p>
+
+<p>LICENSE</p>
+
+<p>This source file is subject to the new BSD license that is bundled
+with this package in the file LICENSE.txt.</p>
+
+<p>If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to dan@crucialwebstudio.com so we can send you a copy immediately.</p>
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\WebhookController::$_handle"></a><h4 class="property protected">$_handle<div class="to-top"><a href="#%5CWebhookController">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\resource <span class="highlight">$_handle</span> = ''</code><p class="short-description">File handle for logging this webhook</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\resource<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::$_isLoggable"></a><h4 class="property protected">$_isLoggable<div class="to-top"><a href="#%5CWebhookController">jump to class</a></div>
+</h4>
+<div class="property">
+<code>\bool <span class="highlight">$_isLoggable</span> = ''</code><p class="short-description">Can we write to the webhook directory?</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h4 class="info">
+<img src="images/arrow_right.gif"> Details</h4>
+<dl class="property-info">
+<dt></dt>
+<dd>\bool<br><em></em>
+</dd>
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>default</dt>
+<dd></dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\WebhookController::_handleBillingDateChange()"></a><h4 class="method protected">_handleBillingDateChange<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_handleBillingDateChange</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::_handleExpiringCard()"></a><h4 class="method protected">_handleExpiringCard<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_handleExpiringCard</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::_handlePaymentFailure()"></a><h4 class="method protected">_handlePaymentFailure<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_handlePaymentFailure</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Handle "payment_failure" webhook event.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::_handlePaymentSuccess()"></a><h4 class="method protected">_handlePaymentSuccess<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_handlePaymentSuccess</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Handle "payment_success" webhook event.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::_handleRenewalFailure()"></a><h4 class="method protected">_handleRenewalFailure<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_handleRenewalFailure</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Handle "renewal_failure" webhook event.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::_handleRenewalSuccess()"></a><h4 class="method protected">_handleRenewalSuccess<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_handleRenewalSuccess</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::_handleSignupFailure()"></a><h4 class="method protected">_handleSignupFailure<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_handleSignupFailure</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Handle "signup_failure" webhook event.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::_handleSignupSuccess()"></a><h4 class="method protected">_handleSignupSuccess<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_handleSignupSuccess</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Handle "signup_success" webhook event.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::_handleSubscriptionStateChange()"></a><h4 class="method protected">_handleSubscriptionStateChange<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_handleSubscriptionStateChange</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Handle "subscription_state_change" webhook event.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::_isValid()"></a><h4 class="method protected">_isValid<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_isValid</span><span class="nb-faded-text">(
+          \string $sharedKey, \string $body, \string $signature
+          )
+        </span>
+        :
+        \bool</code><p class="short-description">Validate that the webhook request is from Chargify</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$sharedKey</dt>
+<dd>\string<br><em>Your site shared key</em>
+</dd>
+<dt>$body</dt>
+<dd>\string<br><em>The string of the raw body sent in the request</em>
+</dd>
+<dt>$signature</dt>
+<dd>\string<br><em>The string sent in the X-Chargify-Webhook-Signature http request header</em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\bool</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>throws</dt>
+<dd></dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\WebhookController::handleAction()"></a><h4 class="method public">handleAction<div class="to-top"><a href="#WebhookController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">handleAction</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Receives and logs Webhook notifications from Chargify</p>
+<div class="long-description"><p>Check out the sample code in here for ideas on how to update your app
+when Chargify notifies your app of subscription changes.</p>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.0</a>.
+    </small></body></html>

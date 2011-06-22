@@ -1,0 +1,20 @@
+; To enable Zferral integration:
+; - rename this file to zferral.ini
+; - set zferral.enabled = 1
+; - set your subdomain and campaign_id
+; 
+; See additional implementation details in /lib/Crucial/View/Helper/Zferral.php 
+; and SubscriptionsController.php.
+
+[production]
+
+; 1 if you want Zferral enabled, 0 if not.
+; If not enabled then subdomain and campaign_id have no effect.
+zferral.enabled = 0
+zferral.api_key = ""
+zferral.subdomain = ""
+zferral.campaign_id = ""
+
+[staging : production]
+
+[development : production]

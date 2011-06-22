@@ -1,0 +1,94 @@
+<div class="subscriptions">
+
+  <h1 id="subscription-title" class="page-title">Subscriptions</h1>
+  <div id="action_bar" class="clearfix">
+    <ul>
+      <li><a class="add" href="/subscriptions/create">Create New Subscription</a></li>
+    </ul>
+  </div>
+  <div id="subscriptions-list" class="list">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            &nbsp;
+          </th>
+          <th>
+            Signup
+          </th>
+          <th>
+            Per. Start
+          </th>
+          <th>
+            Per. End
+          </th>
+          <th>
+            Next Assmt.
+          </th>
+          <th class="icon">Customer</th>
+          <th>Product</th>
+          <th>Status</th>
+          <th>Ops</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($this->subs as $sub): ?>
+          <tr class="data">
+            <td>
+              <a class="view_subscription" href="/subscriptions/read/subscription-id/<?php echo $sub['id'] ?>">View</a>
+            </td>
+            <td>
+              <a href="/subscriptions/read/subscription-id/<?php echo $sub['id'] ?>"><?php echo date('m/d/Y', strtotime($sub['created_at'])) ?></a>
+            </td>
+            <td>
+              <?php echo date('m/d/Y', strtotime($sub['current_period_started_at'])) ?>
+            </td>
+            <td>
+              <?php echo date('m/d/Y', strtotime($sub['current_period_ends_at'])) ?>
+            </td>
+            <td>
+              <?php echo date('m/d/Y', strtotime($sub['next_assessment_at'])) ?>
+            </td>
+            <td>
+              <a class="user" href="/customers/read/customer-id/<?php echo $sub['customer']['id'] ?>"><?php echo $sub['customer']['first_name'] ?> <?php echo $sub['customer']['last_name'] ?></a>
+            </td>
+            <td>
+              (<?php echo $sub['product']['product_family']['name'] ?>) <?php echo $sub['product']['name'] ?>
+            </td>
+            <td>
+              <?php echo $this->subscriptionState($sub['state']) ?>
+            </td>
+            <td>
+              <a class="show_operations" href="#show-operations">Ops</a>
+            </td>
+          </tr>
+          <tr class="operations">
+            <td style="display: none;" colspan="9">
+              <ul>
+                <li class="first">
+                  <a href="/subscriptions/read/subscription-id/<?php echo $sub['id'] ?>">View</a>
+                </li>
+                <li>
+                  <a href="/subscriptions/edit/subscription-id/<?php echo $sub['id'] ?>">Edit</a>
+                </li>
+                <li>
+                  <a href="<?php echo $this->hosted_urls[$sub['id']] ?>">Self-Service Page</a>
+                </li>
+                <li>
+                  <a href="/subscriptions/migrate/subscription-id/<?php echo $sub['id'] ?>">Upgrade/Downgrade</a>
+                </li>
+                <li>
+                  <a href="/subscriptions/cancel/subscription-id/<?php echo $sub['id'] ?>">Cancel</a>
+                </li>
+                <?php if ('canceled' == $sub['state']): ?>
+                  <li><a href="/subscriptions/reactivate/subscription-id/<?php echo $sub['id'] ?>">Reactivate</a></li>
+                <?php endif; ?>
+              </ul>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div> <!-- /subscriptions-list -->
+  
+</div> <!-- /subscriptions -->

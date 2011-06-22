@@ -1,0 +1,53 @@
+<div class="pane" id="components-pane" style="display: block;">
+
+<h2>Components</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Unit Name</th>
+      <th>Type</th>
+      <th>Current Usage</th>
+      <th>Component ID</th>
+      <th>Ops</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($this->comps as $comp): ?>
+      <tr>
+        <td><a class="showOps" href="#"><?php echo $comp['name'] ?></a></td>
+        <td><?php echo $comp['unit_name'] ?></td>
+        <td><?php echo $this->componentType($comp['kind']) ?></td>
+        <td>
+          <?php if ('metered_component' == $comp['kind']): ?>
+            <?php echo $comp['unit_balance'] . ' ' . $comp['unit_name'] . 's'; ?>
+          <?php elseif ('quantity_based_component' == $comp['kind']): ?>
+            <?php echo $comp['allocated_quantity'] . ' ' . $comp['unit_name'] . 's'; ?>
+          <?php elseif ('on_off_component' == $comp['kind']): ?>
+            <?php echo (FALSE == $comp['enabled']) ? 'Off' : 'On'; ?>
+          <?php endif; ?>
+        </td>
+        <td><?php echo $comp['component_id'] ?></td>
+        <td>
+          <a class="showOps show_operations" href="#">Ops</a>
+        </td>
+      </tr>
+      <tr class="operations">
+        <td style="display: none;" colspan="6">
+          <ul>
+            <?php if ('metered_component' == $comp['kind']): ?>
+              <li class="first"><a href="/subscriptions/component-usage/subscription-id/<?php echo $this->sub['id'] ?>/component-id/<?php echo $comp['component_id'] ?>">Record Usage</a></li>
+            <?php elseif ('quantity_based_component' == $comp['kind']): ?>
+              <li class="first"><a href="/subscriptions/component-allocation/subscription-id/<?php echo $this->sub['id'] ?>/component-id/<?php echo $comp['component_id'] ?>">Update Quantity</a></li>
+            <?php elseif ('on_off_component' == $comp['kind']): ?>
+              <li class="first"><a href="/subscriptions/component-on-off/subscription-id/<?php echo $this->sub['id'] ?>/component-id/<?php echo $comp['component_id'] ?>">Toggle On/Off</a></li>
+            <?php endif; ?>
+          </ul>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+</div> <!-- /components-pane -->

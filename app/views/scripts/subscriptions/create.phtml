@@ -1,0 +1,126 @@
+<?php
+/**
+ * Zferral view helper. $this->zferral should only be populated on POST 
+ * and if Zferral is enabled in the config. See the SubscriptionsController.php 
+ * for more details.
+ */
+if (!empty($this->zferral))
+{
+  echo "<!-- Zferral signup tracking pixel -->\n";
+  echo $this->zferral(
+    $this->zferral['subdomain'],
+    $this->zferral['campaign_id'],
+    $this->zferral['revenue'],
+    $this->zferral['subscription_id'],
+    $this->zferral['payment_id']
+  );
+}
+?>
+
+<div class="subscriptions">
+  <h1 class="subscriptions_new">Create New Subscription</h1>
+
+  <p class="app-instruction">Fields marked * are required.</p>
+  <form method="post" id="new_subscription" class="new_subscription" action="">
+    <h3>Customer and Product</h3>
+    <p>
+      <label for="subscription_customer_id">Customer *</label>
+      <select name="subscription[customer_id]" id="subscription_customer_id">
+        <?php foreach ($this->custs as $cust): ?>
+          <option value="<?php echo $cust['id'] ?>"><?php echo $cust['first_name'] . ' ' . $cust['last_name'] ?><?php echo !empty($cust['organization']) ? ' (' . $cust['organization'] . ')' : ''; ?></option>
+        <?php endforeach; ?>
+      </select>
+    </p>
+    <p>
+      <label for="subscription_product_id">Product *</label>
+      <select name="subscription[product_id]" id="subscription_product_id">
+        <?php foreach ($this->prods as $optgroup => $prod): ?>
+          <optgroup label="<?php echo $optgroup ?>">
+            <?php foreach ($prod as $id => $name): ?>
+              <option value="<?php echo $id ?>"><?php echo $name ?></option>
+            <?php endforeach; ?>
+          </optgroup>
+        <?php endforeach; ?>
+      </select>
+    </p>
+    <br>
+    <h3>Billing Information</h3>
+    <p>
+      <label for="subscription_payment_profile_attributes_first_name">First name on card *</label>
+      <input type="text" size="30" name="subscription[payment_profile_attributes][first_name]" id="subscription_payment_profile_attributes_first_name">
+    </p>
+    <p>
+      <label for="subscription_payment_profile_attributes_last_name">Last name on card *</label>
+      <input type="text" size="30" name="subscription[payment_profile_attributes][last_name]" id="subscription_payment_profile_attributes_last_name">
+    </p>
+    <p>
+      <label for="subscription_payment_profile_attributes_full_number">Credit card number *</label>
+      <input type="text" size="30" name="subscription[payment_profile_attributes][full_number]" id="subscription_payment_profile_attributes_full_number">
+    </p>
+    <p class="tip">(For testing, enter &quot;1&quot; for success and &quot;2&quot; for failure)</p>
+    <div class="app-helper-box">
+      <p><strong>Chargify is secure. But this sample app IS NOT!!</strong></p>
+      <p><strong>DO NOT submit a real credit card through this form unless you are on HTTPS!!!</strong></p>
+      <p><strong>You've been warned!</strong></p>
+    </div>
+    <p>
+      <label for="subscription_payment_profile_attributes_cvv">CVV</label>
+      <input type="text" size="30" name="subscription[payment_profile_attributes][cvv]" id="subscription_payment_profile_attributes_cvv">
+    </p>
+    <p>
+      <label for="subscription_payment_profile_attributes_expiration_month">Expiration date</label>
+      <select name="subscription[payment_profile_attributes][expiration_month]" id="subscription_payment_profile_attributes_expiration_month">
+        <option value=""></option>
+        <?php foreach ($this->months as $code => $name): ?>
+          <option value="<?php echo $code ?>"><?php echo $name ?></option>
+        <?php endforeach; ?>
+      </select>
+      <select name="subscription[payment_profile_attributes][expiration_year]" id="subscription_payment_profile_attributes_expiration_year">
+        <option value=""></option>
+        <?php foreach ($this->years as $code => $name): ?>
+          <option value="<?php echo $code ?>"><?php echo $name ?></option>
+        <?php endforeach; ?>
+      </select>
+    </p>
+    <p>
+      <label for="subscription_payment_profile_attributes_billing_address">Billing Address 1</label>
+      <input type="text" size="30" name="subscription[payment_profile_attributes][billing_address]" id="subscription_payment_profile_attributes_billing_address">
+    </p>
+    <p>
+      <label for="subscription_payment_profile_attributes_billing_address_2">Billing Address 2</label>
+      <input type="text" size="30" name="subscription[payment_profile_attributes][billing_address_2]" id="subscription_payment_profile_attributes_billing_address_2">
+    </p>
+    <p>
+      <label for="subscription_payment_profile_attributes_billing_country">Billing Country</label>
+      <select rel="subscription_payment_profile_attributes_billing_state" name="subscription[payment_profile_attributes][billing_country]" id="subscription_payment_profile_attributes_billing_country" class="country_select">
+        <?php foreach ($this->countries as $code => $name): ?>
+          <option value="<?php echo $code ?>"><?php echo $name ?></option>
+        <?php endforeach; ?>
+      </select>
+    </p>
+    <p>
+      <label for="subscription_payment_profile_attributes_billing_state">Billing State</label>
+      <select name="subscription[payment_profile_attributes][billing_state]" id="subscription_payment_profile_attributes_billing_state">
+        <?php foreach ($this->states as $code => $name): ?>
+          <option value="<?php echo $code ?>"><?php echo $name ?></option>
+        <?php endforeach; ?>
+      </select>
+    </p>
+    <p>
+      <label for="subscription_payment_profile_attributes_billing_city">Billing City</label>
+      <input type="text" size="30" name="subscription[payment_profile_attributes][billing_city]" id="subscription_payment_profile_attributes_billing_city">
+    </p>
+    <p>
+      <label for="subscription_payment_profile_attributes_billing_zip">Billing Zip Code</label>
+      <input type="text" size="30" name="subscription[payment_profile_attributes][billing_zip]" id="subscription_payment_profile_attributes_billing_zip">
+    </p>
+    <label for="subscription_coupon_code">Coupon Code</label>
+    <input type="text" size="30" name="subscription[coupon_code]" id="subscription_coupon_code">
+    <p class="app-form-submit">
+      <input type="submit" value="Create Subscription" name="commit" id="subscription_submit" class="app-submit-button">
+      or
+      <a href="/subscriptions/list">Cancel</a>
+    </p>
+  </form>
+ 
+</div> <!-- /subscriptions -->

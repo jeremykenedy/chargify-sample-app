@@ -1,0 +1,63 @@
+<?php if (!$this->paymentId): ?>
+
+  <h2>Select a payment to refund</h1>
+  <p>Next, you'll be able to enter a refund amount, up to the amount of the original payment</p>
+  
+  <div id="refunds-pane">
+  
+    <h3>Payments from the past 120 days:</h3>
+    <table id="account_transactions">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Memo</th>
+          <th>Amount</th>
+          <th>Amount Refunded</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($this->trans as $trans): ?>
+          <tr class="<?php echo $trans['transaction_type']?> <?php echo $this->cycle(array("odd", "even"))->next() ?>">
+            <?php
+              $timeStamp = strtotime($trans['created_at']);
+              $dateFormatted = date('m/d/Y', $timeStamp);
+              $timeFormatted = date('h:i A', $timeStamp);
+            ?>
+            <td><?php echo $dateFormatted ?><br /><?php echo $timeFormatted ?></td>
+            <td><?php echo $this->escape($trans['memo']) ?></td>
+            <td>$<?php echo number_format($trans['amount_in_cents'] / 100, 2) ?></td>
+            <td>$(tbd)</td>
+            <td><a href="/refunds/create/subscription-id/<?php echo $this->subscriptionId ?>/payment-id/<?php echo $trans['id'] ?>">Select</a></td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    
+  </div>
+
+<?php else: ?>
+
+  <h2>Add a refund to this payment</h2>
+  <p>The maximum remaining refund amount for this payment is $(tbd)</p>
+
+  <form method="post" class="formtastic refund" action="">
+    <fieldset class="inputs">
+      <ol>
+        <li id="refund_amount_input" class="string required">
+          <label for="refund_amount">Amount<abbr title="required">*</abbr></label>
+          <input type="text" size="50" name="refund[amount]" id="refund_amount">
+        </li>
+        <li id="refund_memo_input" class="text required">
+          <label for="refund_memo">Memo<abbr title="required">*</abbr></label>
+          <textarea rows="4" name="refund[memo]" id="refund_memo" cols="40"></textarea>
+          <p class="inline-hints">Make sure to give this refund a descriptive name</p>
+        </li>
+      </ol>
+    </fieldset>  
+    <input type="submit" value="Process refund" name="commit" class="app-submit-button">
+    or
+    <a href="/subscriptions/read/subscription-id/<?php echo $this->sub['id'] ?>">Cancel</a>
+</form>
+
+<?php endif; ?>

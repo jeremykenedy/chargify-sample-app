@@ -1,0 +1,92 @@
+<h2>Edit Payment Profile</h2>
+
+<form method="post" class="edit_subscription" action="">
+  <p>
+    <label for="subscription_payment_profile_attributes_first_name">First name on card *</label>
+    <input type="text" value="<?php echo $this->sub['credit_card']['first_name'] ?>" size="30" name="subscription[payment_profile_attributes][first_name]" id="subscription_payment_profile_attributes_first_name">
+  </p>
+
+  <p>
+    <label for="subscription_payment_profile_attributes_last_name">Last name on card *</label>
+    <input type="text" value="<?php echo $this->sub['credit_card']['last_name'] ?>" size="30" name="subscription[payment_profile_attributes][last_name]" id="subscription_payment_profile_attributes_last_name">
+  </p>
+
+  <p>
+    <label for="subscription_payment_profile_attributes_full_number">Credit card number *</label>
+    <input type="text" size="30" name="subscription[payment_profile_attributes][full_number]" id="subscription_payment_profile_attributes_full_number">
+    <span style="display: block; margin: 0pt; padding-bottom: 0pt;" class="note">
+      Current number on file:
+      <?php echo $this->sub['credit_card']['masked_card_number'] ?><br />
+      (For testing, enter &quot;1&quot; for success and &quot;2&quot; for failure)
+    </span>
+    <div class="app-helper-box">
+      <p><strong>Chargify is secure. But this sample app IS NOT!!</strong></p>
+      <p><strong>DO NOT submit a real credit card through this form unless you are on HTTPS!!!</strong></p>
+      <p><strong>You've been warned!</strong></p>
+    </div>
+  </p>
+
+  <p>
+    <label for="subscription_payment_profile_attributes_cvv">CVV</label>
+    <input type="text" size="30" name="subscription[payment_profile_attributes][cvv]" id="subscription_payment_profile_attributes_cvv">
+  </p>
+
+  <p>
+    <label for="subscription_payment_profile_attributes_expiration_month">Expiration date</label>
+    <select name="subscription[payment_profile_attributes][expiration_month]" id="subscription_payment_profile_attributes_expiration_month">
+      <?php foreach ($this->months as $code => $name): ?>
+        <option value="<?php echo $code ?>"<?php echo ($code == $this->sub['credit_card']['expiration_month']) ? ' selected="selected"' : ''; ?>><?php echo $name ?></option>
+      <?php endforeach; ?>
+    </select>
+    <select name="subscription[payment_profile_attributes][expiration_year]" id="subscription_payment_profile_attributes_expiration_year">
+      <?php foreach ($this->years as $code => $name): ?>
+        <option value="<?php echo $code ?>"<?php echo ($code == $this->sub['credit_card']['expiration_year']) ? ' selected="selected"' : ''; ?>><?php echo $name ?></option>
+      <?php endforeach; ?>
+    </select>
+  </p>
+    
+  <p>
+    <label for="subscription_payment_profile_attributes_billing_address">Billing Address 1</label>
+    <input type="text" value="<?php echo $this->sub['credit_card']['billing_address'] ?>" size="30" name="subscription[payment_profile_attributes][billing_address]" id="subscription_payment_profile_attributes_billing_address">
+  </p>
+
+  <p>
+    <label for="subscription_payment_profile_attributes_billing_address_2">Billing Address 2</label>
+    <input type="text" value="<?php echo $this->sub['credit_card']['billing_address_2'] ?>" size="30" name="subscription[payment_profile_attributes][billing_address_2]" id="subscription_payment_profile_attributes_billing_address_2">
+  </p>
+  
+  <p>
+    <label for="subscription_payment_profile_attributes_billing_country">Billing Country</label>
+    <select rel="subscription_payment_profile_attributes_billing_state" name="subscription[payment_profile_attributes][billing_country]" id="subscription_payment_profile_attributes_billing_country" class="country_select">
+      <?php foreach ($this->countries as $code => $name): ?>
+        <option value="<?php echo $code ?>"<?php echo ($code == $this->sub['credit_card']['billing_country']) ? ' selected="selected"' : ''; ?>><?php echo $name ?></option>
+      <?php endforeach; ?>
+    </select>
+  </p>
+
+  <p>
+    <label for="subscription_payment_profile_attributes_billing_state">Billing State</label>
+    <select name="subscription[payment_profile_attributes][billing_state]" id="subscription_payment_profile_attributes_billing_state">
+      <?php foreach ($this->states as $code => $name): ?>
+        <option value="<?php echo $code ?>"<?php echo ($code == $this->sub['credit_card']['billing_state']) ? ' selected="selected"' : ''; ?>><?php echo $name ?></option>
+      <?php endforeach; ?>
+    </select>
+  </p>
+
+  <p>
+    <label for="subscription_payment_profile_attributes_billing_city">Billing City</label>
+    <input type="text" value="<?php echo $this->sub['credit_card']['billing_city'] ?>" size="30" name="subscription[payment_profile_attributes][billing_city]" id="subscription_payment_profile_attributes_billing_city">
+  </p>
+
+  <p>
+    <label for="subscription_payment_profile_attributes_billing_zip">Billing Zip Code</label>
+    <input type="text" value="<?php echo $this->sub['credit_card']['billing_zip'] ?>" size="30" name="subscription[payment_profile_attributes][billing_zip]" id="subscription_payment_profile_attributes_billing_zip">
+  </p>
+  
+  <p>
+    <input type="submit" value="Save Changes" name="commit" id="subscription_submit">
+    or
+    <a href="/subscriptions/read/subscription-id/<?php echo $this->sub['id'] ?>">Cancel</a>
+  </p>
+  
+</form>

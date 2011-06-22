@@ -1,0 +1,8 @@
+* Dan Bowen - Programming and API integration
+  http://www.crucialwebstudio.com/chargify
+
+* Chargify.com - Recurring billing API, interface design
+  http://chargify.com
+
+* Zend Framework
+  http://www.zendframework.com

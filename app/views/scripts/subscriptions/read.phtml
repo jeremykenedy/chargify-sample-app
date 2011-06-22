@@ -1,0 +1,149 @@
+<div id="summary-pane" class="pane" style="display: block;">
+
+  <table class="vertical">
+    <tbody>
+      <tr>
+        <th>Product</th>
+        <td>
+          (<?php echo $this->sub['product']['product_family']['name'] ?>) <?php echo $this->sub['product']['name'] ?> 
+          <span style="font-size: 10px;">
+            <a href="/subscriptions/edit/subscription-id/<?php echo $this->sub['id'] ?>">change</a>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <th>Status</th>
+        <td><?php echo $this->subscriptionState($this->sub['state']) ?></td>
+      </tr>
+      <tr>
+        <th>Current Balance</th>
+        <td>$<?php echo number_format($this->sub['balance_in_cents'] / 100, 2) ?></td>
+      </tr>
+      <tr>
+        <th>Signed Up At</th>
+        <td><?php echo date('m/d/Y', strtotime($this->sub['created_at'])) ?></td>
+      </tr>
+      <tr>
+        <th>Trial Expires At</th>
+        <td>
+          <?php if (!empty($this->sub['trial_ended_at'])): ?>
+            <?php echo date('m/d/Y', strtotime($this->sub['trial_ended_at'])) ?>
+          <?php endif; ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Activated At</th>
+        <td>
+          <?php if (!empty($this->sub['activated_at'])): ?>
+            <?php echo date('m/d/Y', strtotime($this->sub['activated_at'])) ?>
+          <?php endif; ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Next Billing</th>
+        <td><?php echo date('m/d/Y h:iA T', strtotime($this->sub['next_assessment_at'])) ?></td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div> <!-- /summary-pane -->
+
+<div style="display: block;" id="payment-details-pane" class="pane">
+  <h2>Payment Details</h2>
+  
+  <?php if (!empty($this->sub['credit_card'])): ?>
+    <table class="vertical">
+      <tbody>
+        <tr>
+          <th>Credit Card</th>
+          <td><?php echo $this->sub['credit_card']['masked_card_number'] ?> <?php echo $this->sub['credit_card']['card_type'] ?> (exp. <?php echo $this->sub['credit_card']['expiration_month'] ?>/<?php echo $this->sub['credit_card']['expiration_year'] ?>) <a href="/subscriptions/edit-payment-profile/subscription-id/<?php echo $this->sub['id'] ?>">Change</a></td>
+        </tr>
+        <tr>
+          <th>Price</th>
+          <td>$<?php echo number_format($this->sub['product']['price_in_cents'] / 100, 2) ?> every <?php echo $this->sub['product']['interval'] ?> <?php echo $this->sub['product']['interval_unit'] ?></td>
+        </tr>
+        <tr>
+          <th>Notes</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>Options</th>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  
+  <?php // customer doesn't have card. prompt for it ?>
+  <?php else: ?>
+    <p>This customer does not have any payment details saved. <a href="">Add a card</a></p>
+  <?php endif; ?>
+</div> <!-- /payment-details-pane -->
+
+<div style="display: block;" id="customer-details-pane" class="pane">
+  
+  <h2>Customer Details</h2>
+  
+  <table class="vertical">
+    <tbody>
+      <tr>
+        <th>ID</th>
+        <td><?php echo $this->sub['customer']['id'] ?></td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td><a href="mailto:<?php echo $this->sub['customer']['email'] ?>"><?php echo $this->sub['customer']['email'] ?></a></td>
+      </tr>
+      <tr>
+        <th>Phone</th>
+        <td><?php echo $this->sub['customer']['phone'] ?></td>
+      </tr>
+      <tr>
+        <th>Organization</th>
+        <td><?php echo $this->sub['customer']['organization'] ?></td>
+      </tr>
+      <tr>
+        <th>Reference (Your App)</th>
+        <td><?php echo $this->sub['customer']['reference'] ?></td>
+      </tr>
+      <tr>
+        <th>Customer Since</th>
+        <td><?php echo date('m/d/Y', strtotime($this->sub['customer']['created_at'])) ?></td>
+      </tr>
+      <tr>
+        <th>Subscriptions/Purchases</th>
+        <td>
+          <?php foreach ($this->subs as $sub): ?>
+            <a href="/subscriptions/read/subscription-id/<?php echo $sub['id'] ?>">(<?php echo $sub['product']['product_family']['name'] ?>) <?php echo $sub['product']['name'] ?></a> 
+            <span class="subtle">(<?php echo $this->subscriptionState($sub['state']) ?>)</a>
+            <br />
+          <?php endforeach; ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Shipping Address</th>
+        <td><?php echo !empty($this->sub['customer']['address'])   ? $this->sub['customer']['address']   . '<br />' : ''; ?>
+            <?php echo !empty($this->sub['customer']['address_2']) ? $this->sub['customer']['address_2'] . '<br />' : ''; ?>
+            <?php echo !empty($this->sub['customer']['city'])      ? $this->sub['customer']['city']      . ', '     : ''; ?>
+            <?php echo !empty($this->sub['customer']['state'])     ? $this->sub['customer']['state']     . ', '     : ''; ?>
+            <?php echo !empty($this->sub['customer']['zip'])       ? $this->sub['customer']['zip']                  : ''; ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Credit Cards</th>
+        <td>
+          <?php foreach ($this->subs as $sub): ?>
+            <?php if (!empty($sub['credit_card'])): ?>
+              <?php echo $sub['credit_card']['first_name'] ?> <?php echo $sub['credit_card']['last_name'] ?><br />
+              <?php echo $sub['credit_card']['masked_card_number'] ?> exp. <?php echo $sub['credit_card']['expiration_month'] ?>/<?php echo $sub['credit_card']['expiration_year'] ?><br />
+              <?php echo $sub['credit_card']['billing_address'] ?><br />
+              <?php echo $sub['credit_card']['billing_city'] ?>, <?php echo $sub['credit_card']['billing_state'] ?> <?php echo $sub['credit_card']['billing_zip'] ?><br />
+              <?php echo $sub['credit_card']['billing_country'] ?>
+              <hr />
+            <?php endif; ?>
+          <?php endforeach; ?>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div> <!-- /customer-details-pane -->

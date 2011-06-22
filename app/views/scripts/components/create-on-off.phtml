@@ -1,0 +1,19 @@
+<h1>Create New On/Off Component</h1>
+
+<p class="app-instruction">Use the form below to create a new component. Fields marked * are required.</p>
+
+<form action="" class="new_on_off_component" id="new_on_off_component" method="post">
+  <p>
+    <label for="on_off_component_name">Name *</label>
+    <input class="name" id="on_off_component_name" name="on_off_component[name]" size="30" type="text" />
+  </p>
+  <p>
+    <label for="on_off_component_unit_price">Price *</label>
+    <input id="on_off_component_unit_price" name="on_off_component[unit_price]" size="30" style="width:50px;" type="text" />
+  </p>
+  <p>
+    <input class="app-submit-button" id="on_off_component_submit" name="commit" type="submit" value="Create Component" />
+    or
+    <a href="/products/list">Cancel</a>
+  </p>
+</form>

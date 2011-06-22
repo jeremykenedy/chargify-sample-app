@@ -1,0 +1,35 @@
+<div class="customers">
+
+  <h1 id="customers-title" class="page-title">Customers</h1>
+  <div id="action_bar" class="clearfix">
+    <ul>
+      <li><a class="add" href="/customers/create">Create New Customer</a></li>
+    </ul>
+  </div>
+  <div id="customers-list" class="list">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Customer</th>
+          <th>Email</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($this->cust as $cust): ?>
+          <tr class="<?php echo $this->cycle(array("odd", "even"))->next() ?>">
+            <td><?php echo $cust['id'] ?></td>
+            <td>
+              <a href="/customers/read/reference-id/<?php echo $cust['reference'] ?>"><?php echo $cust['first_name'] ?> <?php echo $cust['last_name'] ?></a> 
+              <span class="subtle small"><?php echo !empty($cust['organization']) ? '(' . $cust['organization'] . ')' : '';  ?></span>
+            </td>
+            <td><a href="mailto:<?php echo $cust['email'] ?>"><?php echo $cust['email'] ?></a></td>
+            <td><a href="/customers/read/customer-id/<?php echo $cust['id'] ?>">View</a> - <a href="/customers/edit/customer-id/<?php echo $cust['id'] ?>">Edit</a></td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+  
+</div> <!-- /customers -->

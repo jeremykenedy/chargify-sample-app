@@ -1,0 +1,7 @@
+<div class="page_title_heading">
+  <h1 class="page-title" id="subscription-title">
+    <a href="/customers/read/customer-id/<?php echo $this->sub['customer']['id'] ?>"><?php echo $this->sub['customer']['first_name'] . ' ' . $this->sub['customer']['last_name'] ?></a>
+      <span class="subtle small"> <?php echo !empty($this->sub['customer']['organization']) ? ' (' . $this->sub['customer']['organization'] . ')' : '' ?><span>
+      has a subscription to (<?php echo $this->sub['product']['product_family']['name'] ?>) <?php echo $this->sub['product']['name'] ?></span></span>
+  </h1>
+</div>

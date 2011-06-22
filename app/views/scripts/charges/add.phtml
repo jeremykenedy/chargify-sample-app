@@ -1,0 +1,21 @@
+<h2>Add a charge to this subscription</h2>
+
+<p>Adding a charge to a subscription causes the customer's credit card to be charged immediately for the amount you enter. If the charging of the credit card fails, we'll let you know and the customer's balance will not be affected. (But, you will be able to see a failed payment in the history).</p>
+<p><strong>Note:</strong> This will not use any existing balance credits.</p>
+
+<form method="post" class="formtastic charge" action="">
+  <fieldset class="inputs">
+    <ol>
+      <li id="charge_amount_input" class="string required">
+        <label for="charge_amount">Amount<abbr title="required">*</abbr></label>
+        <input type="text" size="50" name="charge[amount]" id="charge_amount">
+      </li>
+      <li id="charge_memo_input" class="text required">
+        <label for="charge_memo">Memo<abbr title="required">*</abbr></label>
+        <textarea rows="4" name="charge[memo]" id="charge_memo" cols="40"></textarea>
+        <p class="inline-hints">Make sure to give this charge a descriptive name</p>
+      </li>
+    </ol>
+  </fieldset>  
+  <input type="submit" value="Assess this charge" name="commit" class="app-submit-button"> or <a href="/subscriptions/read/subscription-id/<?php echo $this->sub['id'] ?>">Cancel</a>
+</form>

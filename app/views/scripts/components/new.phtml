@@ -1,0 +1,40 @@
+<h1>Create a new Component</h1>
+
+<div class="clearfix tiles">
+  <div class="tile">
+    <div class="tile_perimeter">
+      <h3>
+        <a href="/components/create-metered/family-id/<?php echo $this->familyId ?>">Metered Component</a>
+      </h3>
+      <div class="tile_content">
+        <p>Allows you to track usage in a metered manner, i.e. minutes used per month.  You report usage, and Chargify calculates the correct charges.</p>
+        <p>Usages reset to 0 at the beginning of every period.</p>
+      </div>
+      <a class="overlay" href="/components/create-metered/family-id/<?php echo $this->familyId ?>">Create a Metered component</a>
+    </div>
+  </div>
+  <div class="tile">
+    <div class="tile_perimeter">
+      <h3>
+        <a href="/components/create-quantity/family-id/<?php echo $this->familyId ?>">Quantity based Component</a>
+      </h3>
+      <div class="tile_content">
+        <p>Allows you to charge per unit of something, with pricing structures that can be per-unit, tiered, volume, or stairstep.  Does not reset to 0 every period like metered.</p>
+        <p>e.g. Your customer requests 3 IP addresses, at $1 each</p>
+      </div>
+      <a class="overlay" href="/components/create-quantity/family-id/<?php echo $this->familyId ?>">Create a Quantity based component</a>
+    </div>
+  </div>
+  <div class="tile">
+    <div class="tile_perimeter">
+      <h3>
+        <a href="/components/create-on-off/family-id/<?php echo $this->familyId ?>">On/Off Component</a>
+      </h3>
+      <div class="tile_content">
+        <p>Allows you to add components that can be toggled either on or off.  Does not reset to 0 every period like metered.</p>
+        <p>e.g. Your customer enables the “24/7 Support” option for $99 a month.</p>
+      </div>
+      <a class="overlay" href="/components/create-on-off/family-id/<?php echo $this->familyId ?>">Create an On off component</a>
+    </div>
+  </div>
+</div>

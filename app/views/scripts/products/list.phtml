@@ -1,0 +1,85 @@
+<!-- hack for <body class="products"> so css targets correctly -->
+<div class="products">
+
+  <h1 id="product-family-title" class="page-title">Products</h1>
+  
+  <div id="products-list">
+  
+    <?php foreach ($this->families as $id => $f): ?>
+    
+      <div id="product-family-<?php echo $id ?>" class="product-family clearfix">
+      
+        <div class="product_family_heading clearfix">
+          <h2 title="<?php echo $f['name'] ?>" class="product-family-name"><?php echo $f['name'] ?></h2>
+        </div>
+        
+        <table>
+          <thead>
+            <tr>
+              <th width="40%">Name</th>
+              <th width="25%">Price</th>
+              <th width="10%">Status</th>
+              <th width="10%">API Handle</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($f['products'] as $p): ?>
+            <tr id="product-<?php echo $p['id'] ?>" class="<?php echo $this->cycle(array("odd", "even"))->next() ?>">
+              <td>
+                <p class="tablehead">
+                  <a class="color " href="/products/read/id/<?php echo $p['id'] ?>"><?php echo $p['name'] ?></a>
+                </p>
+                <span class="subtle small"></span>
+              </td>
+              <td>
+                $<?php echo number_format($p['price_in_cents'] / 100, 2) ?><span class="subtle"> every <?php echo $p['interval'] ?> <?php echo $p['interval_unit'] ?></span>
+                <!--<br>No <span class="subtle">Setup Fee</span><br>$0 <span class="subtle">1 month Trial</span>--></td>
+              <td><?php echo ($p['archived_at'] == NULL) ? 'Active' : 'Archived'; ?></td>
+              <td><a href="/products/read/handle/<?php echo $p['handle'] ?>"><?php echo $p['handle'] ?></a></td>
+              <td><a href="https://<?php echo $this->hostname ?>/h/<?php echo $p['id'] ?>/subscriptions/new" target="_blank">Payment Page</a></td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+        
+        <br />
+        <a class="new-link-small link-button" href="/components/new/family-id/<?php echo $id ?>">Create a Component</a>
+        <h3>Components</h3>
+        <a name="components_1398"></a>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Unit Name</th>
+              <th>Price Per Unit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($this->comps[$id] as $c): ?>
+              <tr>
+                <td><?php echo $c['name'] ?></td>
+                <td><?php echo $c['id'] ?></td>
+                <td><?php echo $this->componentType($c['kind']) ?></td>
+                <td><?php echo $c['unit_name'] ?></td>
+                <td>
+                  <?php if ('per_unit' == $c['pricing_scheme'] || 'on_off_component' == $c['kind']): ?>
+                    $<?php echo number_format($c['unit_price'], 2) ?>
+                  <?php else: ?>
+                    Varies by tier
+                  <?php endif; ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+        
+      </div>
+    <?php endforeach; ?>
+
+  </div <!-- /producs-list -->
+  
+</div> <!-- /products -->

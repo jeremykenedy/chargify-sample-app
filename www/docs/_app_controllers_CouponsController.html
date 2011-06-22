@@ -1,0 +1,156 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">app/controllers/CouponsController.php</h1>
+<div class="file_menu">
+<a href="#includes">Includes</a> <a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>category</dt>
+<dd>App</dd>
+<dt>copyright</dt>
+<dd>Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)</dd>
+<dt>license</dt>
+<dd>New BSD License</dd>
+<dt>package</dt>
+<dd>Controllers</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CCouponsController">CouponsController</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">Chargify Sample App</p>
+<div class="long-description"><p>LICENSE</p>
+
+<p>This source file is subject to the new BSD license that is bundled
+with this package in the file LICENSE.txt.</p>
+
+<p>If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to dan@crucialwebstudio.com so we can send you a copy immediately.</p>
+</div>
+<a name="classes"></a><a id="\CouponsController"></a><h2 class="class">\CouponsController<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_app_controllers_ChargifyController.html#%5CChargifyController">\ChargifyController</a></dd>
+<dt>category</dt>
+<dd>App</dd>
+<dt>copyright</dt>
+<dd>Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)</dd>
+<dt>license</dt>
+<dd>New BSD License</dd>
+<dt>package</dt>
+<dd>Controllers</dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CCouponsController::showAction()">showAction</a></dd>
+<dd><a class="method public" href="#%5CCouponsController::findAction()">findAction</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Chargify Sample App</p>
+<div class="long-description"><p>LICENSE</p>
+
+<p>This source file is subject to the new BSD license that is bundled
+with this package in the file LICENSE.txt.</p>
+
+<p>If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to dan@crucialwebstudio.com so we can send you a copy immediately.</p>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\CouponsController::findAction()"></a><h4 class="method public">findAction<div class="to-top"><a href="#CouponsController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">findAction</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Find a coupon</p>
+<div class="long-description"><p>Helpful for validating coupons entered by customers.</p>
+
+<p>This page is not linked to anywhere within the app. Access it at the URL
+specified and check Firebug for details.</p>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>link</dt>
+<dd>/coupons/show/family-id/{product-family-id}/code/{coupon-code}</dd>
+<dt>link</dt>
+<dd>http://docs.chargify.com/api-coupons</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\CouponsController::showAction()"></a><h4 class="method public">showAction<div class="to-top"><a href="#CouponsController">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">showAction</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        </code><p class="short-description">Show the details of a coupon</p>
+<div class="long-description"><p>This page is not linked to anywhere within the app. Access it
+at the URL specified and check Firebug for details.</p>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>link</dt>
+<dd>/coupons/show/family-id/{product-family-id}/coupon-id/{coupon-id}</dd>
+<dt>link</dt>
+<dd>http://docs.chargify.com/api-coupons</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.0</a>.
+    </small></body></html>

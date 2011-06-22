@@ -1,0 +1,11 @@
+<h2>Reset Balance to $0.00</h2>
+
+<p>Chargify offers the ability to easily reset the balance of a subscription 
+to zero. If a subscription has a positive balance, this API call will 
+issue a credit to the subscription for the outstanding balance. This 
+is particularly helpful if you want to reactivate a canceled subscription 
+without charging the customer for their previously owed balance.</p>
+
+<form method="POST" action="" class="formtastic">
+  <input class="app-submit-button" type="submit" name="submit" value="Reset balance to $0.00" /> or <a href="/subscriptions/read/subscription-id/<?php echo $this->sub['id'] ?>">Cancel</a>
+</form>

@@ -1,0 +1,29 @@
+<h2>Adjust Subscription balance</h2>
+
+<p>Adding an adjustment to a subscription will either increase or decrease the balance of the subscription. The customer's credit card will not be effected.</p>
+<p>This subscription has an outstanding balance of $<?php echo number_format($this->sub['balance_in_cents'] / 100, 2) ?></p>
+
+<form method="post" class="formtastic adjustment" action="">
+  <fieldset class="inputs">
+    <ol>
+      <label for="adjustment_Action*">Action*</label>
+      <select style="margin-bottom: 15px;" name="adjustment[adjustment_method]" id="adjustment_adjustment_method" class="adjustment-action">
+        <option value="decrease">Decrease the subscription's balance by</option>
+        <option value="increase">Increase the subscription's balance by</option>
+        <option value="target">Set the subscription's balance to</option>
+      </select>
+      <li id="adjustment_amount_input" class="string required">
+        <label for="adjustment_amount">Amount<abbr title="required">*</abbr></label>
+        <input type="text" size="50" name="adjustment[amount]" id="adjustment_amount">
+      </li>
+      <li id="adjustment_memo_input" class="text optional">
+        <label for="adjustment_memo">Memo</label>
+        <textarea rows="4" name="adjustment[memo]" id="adjustment_memo" cols="40"></textarea>
+        <p class="inline-hints">Make sure to give this adjustment a descriptive name</p>
+      </li>
+    </ol>
+  </fieldset>  
+  <input type="submit" value="Assess this adjustment" name="commit" class="app-submit-button">
+  or
+  <a href="/subscriptions/read/subscription-id/<?php echo $this->sub['id'] ?>">Cancel</a>
+</form>

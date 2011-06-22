@@ -1,0 +1,25 @@
+<h2>Update quantity for &quot;<?php echo $this->comp['name'] ?>&quot;</h2>
+
+<p>Updating this will override the old value. Charges will be assessed to the 
+subscription at the beginning of the next billing period, based on the current 
+quantity at that time. (We do not currently prorate quantity components).</p>
+
+<form method="post" id="new_allocation" class="formtastic allocation" action="">
+  <fieldset class="inputs">
+    <ol>
+      <li id="allocation_quantity_input" class="numeric required">
+        <label for="allocation_quantity">Quantity<abbr title="required">*</abbr></label>
+        <input type="text" value="<?php echo $this->comp['allocated_quantity'] ?>" size="50" name="allocation[quantity]" id="allocation_quantity">
+      </li>
+      <li id="allocation_memo_input" class="text optional">
+        <label for="allocation_memo">Memo</label>
+        <textarea rows="4" name="allocation[memo]" id="allocation_memo" cols="40"></textarea>
+        <p class="inline-hints">Add a note to describe this allocation</p>
+      </li>
+    </ol>
+  </fieldset>
+  
+  <input type="submit" value="Update" name="commit" id="record_allocation_button" class="app-submit-button">
+  or
+  <a href="/subscriptions/list-components/subscription-id/<?php echo $this->sub['id'] ?>">Cancel</a>
+</form>

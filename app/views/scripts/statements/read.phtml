@@ -1,0 +1,87 @@
+<style type="text/css">
+  #billing_statement .fn { font-weight: bold; }
+  #billing_statement #billing_statement_summary_section .billing_statement_summary_label {
+    display: inline-block;
+    width: 45%;
+    font-weight: bold;
+  }
+  #billing_statement #billing_statement_summary_section .billing_statement_summary_value {
+    display: inline-block;
+    width: 54%;
+    text-align: right;
+  }
+  #billing_statement table.billing_statement_listing { margin: 0 0 15px 0; }
+  #billing_statement table.billing_statement_listing td {
+    background-color: transparent;
+    padding: 3px 5px;
+    border: none;
+    text-align: left;
+    vertical-align: bottom;
+  }
+  #billing_statement table.billing_statement_listing th {
+    background-color: transparent;
+    padding: 3px 5px;
+    border: none;
+    text-align: left;
+    vertical-align: bottom;
+  }
+  #billing_statement table.billing_statement_listing th {
+    font-weight: bold;
+    color: #333333;
+    border-bottom: 1px solid #666666;
+  }
+  #billing_statement table.billing_statement_listing td { border-bottom: 1px solid #d5d5d5; }
+  #billing_statement table.billing_statement_listing tr.billing_statement_listing_tfoot td {
+    font-weight: bold;
+    text-align: right;
+    border-bottom: 1px solid #666666;
+  }
+  #billing_statement table.billing_statement_listing td.billing_statement_listing_cell_money { text-align: right; }
+  #billing_statement table.billing_statement_listing th.billing_statement_listing_cell_money { text-align: right; }
+  #billing_statement h2.billing_statement_section_title {
+    background-color: #efefef;
+    text-shadow: 1px 1px 1px #ffffff;
+    color: #333333;
+    padding: 2px 5px;
+    margin: 0 0 15px 0;
+    font-size: 1.2em;
+  }
+  #billing_statement div.billing_statement_section_content {
+    padding: 0 5px;
+    margin: 0 0 15px 0;
+  }
+  #billing_statement h3 {
+    font-size: 1em;
+    color: #333333;
+    margin: 0 0 15px 0;
+  }
+  #billing_statement .vcard h3 { margin: 0; }
+  #billing_statement #billing_statement_account_information_section {
+    width: 50%;
+    float: left;
+  }
+  #billing_statement #billing_statement_summary_section {
+    width: 50%;
+    float: left;
+  }
+  #billing_statement #billing_statement_detail_section { clear: both; }
+  #billing_statement #billing_statement_detail_section table.billing_statement_detail_listing th.billing_statement_listing_cell_datetime { width: 20%; }
+  #billing_statement #billing_statement_detail_section table.billing_statement_detail_listing th.billing_statement_listing_cell_type { width: 15%; }
+  #billing_statement #billing_statement_detail_section table.billing_statement_detail_listing th.billing_statement_listing_cell_detail { width: 50%; }
+  #billing_statement #billing_statement_detail_section table.billing_statement_detail_listing th.billing_statement_listing_cell_money { width: 15%; }
+  #billing_statement h2#billing_statement_account_information_section_title { margin: 0 10px 15px 0; }
+  #billing_statement #billing_statement_summary_usage_period { padding: 0 0 10px 0; }
+  #billing_statement #billing_statement_summary_balance_summary { padding: 0 0 10px 0; }
+  #billing_statement #billing_statement_summary_balance_paid_date { padding: 0 0 10px 0; }
+  #billing_statement #billing_statement_summary_balance_paid_stamp {
+    text-align: right;
+    color: #ff0000;
+    font-size: 18px;
+  }
+  #billing_statement span.time_and_zone { white-space: nowrap; }
+  #billing_statement .adr { margin: 15px 0; }
+</style>
+
+<h1>Statement</h1>
+
+<?php echo $this->statement ?>

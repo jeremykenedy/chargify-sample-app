@@ -1,0 +1,72 @@
+<a class="app-main-button" href="/products/list">Return to Products List »</a>
+<h1>Product Details</h1>
+<h2><?php echo $this->product['name'] ?></h2>
+<table class="vertical">
+  <tbody>
+    <tr>
+      <td class="table_label">
+        Product family:
+      </td>
+      <td class="t14 bt4">
+        <?php echo $this->product['product_family']['name'] ?>
+      </td>
+    </tr>
+    <tr>
+      <td class="table_label">
+        Product type:
+      </td>
+      <td>
+        Recurring
+      </td>
+    </tr>
+    <tr>
+      <td class="table_label">
+        Description:
+      </td>
+      <td>
+        <?php echo $this->product['description'] ?>
+      </td>
+    </tr>
+    <tr>
+      <td class="table_label">
+        Accounting code:
+      </td>
+      <td>
+        <?php echo $this->product['accounting_code'] ?>
+      </td>
+    </tr>
+    <tr>
+      <td class="table_label">
+        Return URL:
+      </td>
+      <td>
+        <?php echo $this->product['return_url'] ?>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Return params:
+      </td>
+      <td>
+        <?php echo $this->product['return_params'] ?>
+      </td>
+    </tr>
+    <tr>
+      <td class="table_label">
+        API handle:
+      </td>
+      <td>
+        <?php echo $this->product['handle'] ?>
+      </td>
+    </tr>
+    <tr>
+      <td class="table_label">
+        Price:
+      </td>
+      <td>
+        $<?php echo number_format($this->product['price_in_cents'] / 100, 2) ?> every <?php echo $this->product['interval'] ?> <?php echo $this->product['interval_unit'] ?>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="clearfix"></div>

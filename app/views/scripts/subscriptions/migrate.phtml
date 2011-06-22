@@ -1,0 +1,62 @@
+<h2>Upgrade/Downgrade</h2>
+<p>An upgrade/downgrade &quot;migration&quot; allows you to move a subscriber to a new product using basic proration rules.</p>
+<p>If you prefer to move a subscriber to a new product without performing any proration, you may simply <a href="/subscriptions/edit/subscription-id/<?php echo $this->sub['id']?>">change the product for this subscription</a>.</p>
+<p>Upgrading/Downgrading will have the following effects:</p>
+
+<ul class="prorate-details">
+  <li>A prorated credit of approximately <strong>$<?php echo number_format($this->migrationCredit($this->sub) / 100, 2) ?></strong> will be applied for the current product</li>
+  <li style="display: none;" class="effect-trial">A charge for the trial, if applicable, will be applied</li>
+  <li style="display: none;" class="effect-trial">The trial start date will be reset to today's date</li>
+  <li class="effect-charge">A charge for the full amount of the new product will be applied</li>
+  <li class="effect-charge">The period start date will be reset to today's date</li>
+</ul>
+  
+<table id="migration_matrix">
+  <thead>
+    <tr>
+      <th></th>
+      <?php foreach ($this->prods as $prod): ?>
+        <th class="<?php echo ($this->sub['product']['id'] == $prod['id']) ? 'current' : ''; ?>"><?php echo $prod['name'] ?></th>
+      <?php endforeach; ?>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Pricing Details</td>
+      <?php foreach ($this->prods as $prod): ?>
+        <td class="<?php echo ($this->sub['product']['id'] == $prod['id']) ? 'current' : ''; ?>">
+          $<?php echo number_format($prod['price_in_cents'] / 100, 2) ?><span class="subtle"> every <?php echo $prod['interval'] ?> <?php echo $prod['interval_unit'] ?></span><br />
+          $<?php echo number_format($prod['initial_charge_in_cents'] / 100, 2) ?> <span class="subtle">Setup Fee</span><br />
+          <?php if (!empty($prod['trial_interval'])): ?>
+            $<?php echo number_format($prod['trial_price_in_cents'] / 100, 2) ?> <span class="subtle"><?php echo $prod['trial_interval'] ?> <?php echo $prod['trial_interval_unit'] ?> Trial</span>
+          <?php else: ?>
+            No <span class="subtle">Trial</span>
+          <?php endif; ?>
+        </td>
+      <?php endforeach; ?>
+    </tr>
+    <tr>
+      <td></td>
+      <?php foreach ($this->prods as $prod): ?>
+        <td class="<?php echo ($this->sub['product']['id'] == $prod['id']) ? 'current' : ''; ?>">
+          <?php if ($this->sub['product']['id'] != $prod['id']): ?>
+            <form method="post" action="">
+              <div style="height: 50px;"></div>
+              <input type="hidden" value="<?php echo $prod['id'] ?>" name="product_id" />
+              <?php if (!empty($prod['trial_interval']) && $this->sub['product']['id'] != $prod['id']): ?>
+                <input type="checkbox" name="include_trial" value="1" /> Include Trial
+              <?php endif; ?>
+              <input type="submit" name="submit" value="Select Product" />
+            </form>
+            <?php endif; ?>
+        </td>
+      <?php endforeach; ?>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="current"></td>
+      <td class=""></td>
+      <td class=""></td>
+    </tr>
+  </tbody>
+</table>

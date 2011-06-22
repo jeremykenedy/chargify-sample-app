@@ -1,0 +1,6 @@
+# exclude tmp
+tmp/
+
+# exclude standard config files in favor or .dist files
+app/configs/chargify.ini
+app/configs/zferral.ini

@@ -1,0 +1,187 @@
+<h1>Create a new Metered Component</h1>
+
+<div class="two_col_right_sidebar">
+  <div class="tips-sidebar">
+    <div class="top">
+      <div class="bottom">
+        <p>Allows you to track usage in a metered manner, i.e. minutes used per month.  You report usage, and Chargify calculates the correct charges.</p>
+        <p>Usages reset to 0 at the beginning of every period.</p>
+        <p>These components are priced according to the selected pricing scheme:</p>
+        <h3>Per-Unit</h3>
+        <p>Only 1 price bracket is allowed. Any quantity of allocation (that falls within the allowed range) is charged the same per-unit cost.</p>
+        <h3>Volume</h3>
+        <p>All units are assessed the same per-unit cost according to the prevailing price for the quantity.  i.e., from the example above, 3 units would now cost $2.25 (3*$0.75)</p>
+        <h3>Tiered</h3>
+        <p>Every unit used is assessed a cost within its own tier.  i.e. if 1-2 units cost $1/each and 3-4 units cost $0.75, buying 3 units will cost $2.75 (2*$1 + 1*$0.75)</p>
+        <h3>Stairstep</h3>
+        <p>A total cost is assessed according to the price bracket of the quantity used.  i.e. 0-50 customers is free, 51-500 customers is $49, etc.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main">
+    <p>Use the form below to create a new Metered Component. Fields marked * are required.</p>
+    <form method="post" class="formtastic metered_component" id="new_metered_component" action="">
+      <input type="hidden" id="component_type" name="component_type" value="metered" />
+      <fieldset id="bracket_pricing_form_fields" class="inputs">
+        <ol>
+          <li id="metered_component_name_input" class="string required">
+            <label for="metered_component_name">Name<abbr title="required">*</abbr></label>
+            <input type="text" size="50" name="metered_component[name]" maxlength="255" id="metered_component_name">
+            <p class="inline-hints">A name for this component that is suitable for showing customers and on billing statements, i.e. "Minutes"</p>
+          </li>
+          <li id="metered_component_unit_name_input" class="string required">
+            <label for="metered_component_unit_name">Unit name<abbr title="required">*</abbr></label>
+            <input type="text" size="50" name="metered_component[unit_name]" maxlength="255" id="metered_component_unit_name">
+            <p class="inline-hints">A name for the unit this component is measured in.  Should be lower case and in singular form, i.e. "minute".  We may pluralize this value when constructing reports, i.e. "20 minutes"</p>
+          </li>
+          <li id="metered_component_pricing_scheme_input" class="select required">
+            <label for="metered_component_pricing_scheme">Pricing scheme<abbr title="required">*</abbr></label>
+            <select name="metered_component[pricing_scheme]" id="metered_component_pricing_scheme">
+              <option value=""></option>
+              <option value="per_unit">Per unit</option>
+              <option value="volume">Volume</option>
+              <option value="tiered">Tiered</option>
+              <option value="stairstep">Stairstep</option>
+            </select>
+            <p class="inline-hints">See the sidebar for pricing scheme descriptions.</p>
+          </li>
+          <li id="metered_component_unit_price_input" class="numeric required" style="display: none;">
+            <label for="metered_component_unit_price">Unit price<abbr title="required">*</abbr></label>
+            <input type="text" size="50" name="metered_component[unit_price]" id="metered_component_unit_price">
+            <p class="inline-hints">per unit</p>
+          </li>
+          
+          <li id="component_price_brackets">
+            <label>Price Brackets</label>
+            <p class="hint">
+              Brackets may not overlap.  Leave the ending quantity blank for &infin; (infinity); hence, only one
+              bracket with a starting quantity may have a blank ending quantity.  For tiered and volume pricing,
+              the price indicates the per-unit cost at that tier.  For stairstep pricing, the price represents the
+              cost of the entire bracket.  Empty brackets will be ignored.
+            </p>
+            <div class="price_bracket clearfix new_record empty">
+              <ul>
+                <li class="numeric required" id="metered_component_prices_attributes_0_starting_quantity_input">
+                  <label for="metered_component_prices_attributes_0_starting_quantity">Starting Quantity<abbr title="required">*</abbr></label>
+                  <input class="starting_quantity" id="metered_component_prices_attributes_0_starting_quantity" name="metered_component[prices_attributes][0][starting_quantity]" size="50" style="width:100px" type="text" />
+                  <p class="inline-hints">units</p>
+                </li>
+                <li class="numeric optional" id="metered_component_prices_attributes_0_ending_quantity_input">
+                  <label for="metered_component_prices_attributes_0_ending_quantity">Ending Quantity</label>
+                  <input class="ending_quantity" id="metered_component_prices_attributes_0_ending_quantity" name="metered_component[prices_attributes][0][ending_quantity]" size="50" style="width:100px" type="text" />
+                  <p class="inline-hints">units</p>
+                </li>
+                <li class="numeric required" id="metered_component_prices_attributes_0_unit_price_input">
+                  <label for="metered_component_prices_attributes_0_unit_price">Unit price<abbr title="required">*</abbr></label>
+                  <input class="bracket_price" id="metered_component_prices_attributes_0_unit_price" name="metered_component[prices_attributes][0][unit_price]" size="50" style="width:150px" type="text" />
+                  <p class="inline-hints">per unit</p>
+                </li>
+                <li class="remove_link">
+                  <!-- will be filled via javascript with a "Remove" link -->
+                </li>
+              </ul>
+            </div>
+        
+            <div class="price_bracket clearfix new_record empty">
+              <ul>
+                <li class="numeric required" id="metered_component_prices_attributes_1_starting_quantity_input">
+                  <label for="metered_component_prices_attributes_1_starting_quantity">Starting Quantity<abbr title="required">*</abbr></label>
+                  <input class="starting_quantity" id="metered_component_prices_attributes_1_starting_quantity" name="metered_component[prices_attributes][1][starting_quantity]" size="50" style="width:100px" type="text" />
+                  <p class="inline-hints">units</p>
+                </li>
+                <li class="numeric optional" id="metered_component_prices_attributes_1_ending_quantity_input">
+                  <label for="metered_component_prices_attributes_1_ending_quantity">Ending Quantity</label>
+                  <input class="ending_quantity" id="metered_component_prices_attributes_1_ending_quantity" name="metered_component[prices_attributes][1][ending_quantity]" size="50" style="width:100px" type="text" />
+                  <p class="inline-hints">units</p>
+                </li>
+                <li class="numeric required" id="metered_component_prices_attributes_1_unit_price_input">
+                  <label for="metered_component_prices_attributes_1_unit_price">Unit price<abbr title="required">*</abbr></label>
+                  <input class="bracket_price" id="metered_component_prices_attributes_1_unit_price" name="metered_component[prices_attributes][1][unit_price]" size="50" style="width:150px" type="text" />
+                  <p class="inline-hints">per unit</p>
+                </li>
+                <li class="remove_link">
+                  <!-- will be filled via javascript with a "Remove" link -->
+                </li>
+              </ul>
+            </div>
+            <div class="price_bracket clearfix new_record empty">
+              <ul>
+                <li class="numeric required" id="metered_component_prices_attributes_2_starting_quantity_input">
+                  <label for="metered_component_prices_attributes_2_starting_quantity">Starting Quantity<abbr title="required">*</abbr></label>
+                  <input class="starting_quantity" id="metered_component_prices_attributes_2_starting_quantity" name="metered_component[prices_attributes][2][starting_quantity]" size="50" style="width:100px" type="text" />
+                  <p class="inline-hints">units</p>
+                </li>
+                <li class="numeric optional" id="metered_component_prices_attributes_2_ending_quantity_input">
+                  <label for="metered_component_prices_attributes_2_ending_quantity">Ending Quantity</label>
+                  <input class="ending_quantity" id="metered_component_prices_attributes_2_ending_quantity" name="metered_component[prices_attributes][2][ending_quantity]" size="50" style="width:100px" type="text" />
+                  <p class="inline-hints">units</p>
+                </li>
+                <li class="numeric required" id="metered_component_prices_attributes_2_unit_price_input">
+                  <label for="metered_component_prices_attributes_2_unit_price">Unit price<abbr title="required">*</abbr></label>
+                  <input class="bracket_price" id="metered_component_prices_attributes_2_unit_price" name="metered_component[prices_attributes][2][unit_price]" size="50" style="width:150px" type="text" />
+                  <p class="inline-hints">per unit</p>
+                </li>
+                <li class="remove_link">
+                  <!-- will be filled via javascript with a "Remove" link -->
+                </li>
+              </ul>
+            </div>
+            <div class="price_bracket clearfix new_record empty">
+              <ul>
+                <li class="numeric required" id="metered_component_prices_attributes_3_starting_quantity_input">
+                  <label for="metered_component_prices_attributes_3_starting_quantity">Starting Quantity<abbr title="required">*</abbr></label>
+                  <input class="starting_quantity" id="metered_component_prices_attributes_3_starting_quantity" name="metered_component[prices_attributes][3][starting_quantity]" size="50" style="width:100px" type="text" />
+                  <p class="inline-hints">units</p>
+                </li>
+                <li class="numeric optional" id="metered_component_prices_attributes_3_ending_quantity_input">
+                  <label for="metered_component_prices_attributes_3_ending_quantity">Ending Quantity</label>
+                  <input class="ending_quantity" id="metered_component_prices_attributes_3_ending_quantity" name="metered_component[prices_attributes][3][ending_quantity]" size="50" style="width:100px" type="text" />
+                  <p class="inline-hints">units</p>
+                </li>
+                <li class="numeric required" id="metered_component_prices_attributes_3_unit_price_input">
+                  <label for="metered_component_prices_attributes_3_unit_price">Unit price<abbr title="required">*</abbr></label>
+                  <input class="bracket_price" id="metered_component_prices_attributes_3_unit_price" name="metered_component[prices_attributes][3][unit_price]" size="50" style="width:150px" type="text" />
+                  <p class="inline-hints">per unit</p>
+                </li>
+                <li class="remove_link">
+                  <!-- will be filled via javascript with a "Remove" link -->
+                </li>
+              </ul>
+            </div>
+        
+            <div class="price_bracket clearfix new_record empty">
+              <ul>
+                <li class="numeric required" id="metered_component_prices_attributes_4_starting_quantity_input">
+                  <label for="metered_component_prices_attributes_4_starting_quantity">Starting Quantity<abbr title="required">*</abbr></label>
+                  <input class="starting_quantity" id="metered_component_prices_attributes_4_starting_quantity" name="metered_component[prices_attributes][4][starting_quantity]" size="50" style="width:100px" type="text" />
+                  <p class="inline-hints">units</p>
+                </li>
+                <li class="numeric optional" id="metered_component_prices_attributes_4_ending_quantity_input">
+                  <label for="metered_component_prices_attributes_4_ending_quantity">Ending Quantity</label>
+                  <input class="ending_quantity" id="metered_component_prices_attributes_4_ending_quantity" name="metered_component[prices_attributes][4][ending_quantity]" size="50" style="width:100px" type="text" />
+                  <p class="inline-hints">units</p>
+                </li>
+                <li class="numeric required" id="metered_component_prices_attributes_4_unit_price_input"><label for="metered_component_prices_attributes_4_unit_price">Unit price<abbr title="required">*</abbr></label><input class="bracket_price" id="metered_component_prices_attributes_4_unit_price" name="metered_component[prices_attributes][4][unit_price]" size="50" style="width:150px" type="text" />
+                  <p class="inline-hints">per unit</p>
+                </li>
+                <li class="remove_link">
+                  <!-- will be filled via javascript with a "Remove" link -->
+                </li>
+              </ul>
+            </div>
+          
+            <p id="need_more">
+              If you need more tiers, please save this component and come back to edit it
+            </p>
+          </li>
+        </ol>
+      </fieldset>
+      <div>
+        <input type="submit" value="Create Component" name="commit" class="app-submit-button">
+        or
+        <a href="/products/list">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

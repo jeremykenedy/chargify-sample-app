@@ -1,0 +1,31 @@
+<div class="pane" id="statements-pane" style="display: block;">
+  <h2>Statements</h2>
+  <table id="statemetns">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Paid?</th>
+        <th>Paid on</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($this->statements as $st): ?>
+        <tr class="<?php echo $this->cycle(array("odd", "even"))->next() ?>">
+          <td><a href="/statements/read/statement-id/<?php echo $st['id'] ?>"><?php echo $st['id'] ?></a></td>
+          <td><?php echo !empty($st['closed_at']) ? date('m/d/Y', strtotime($st['closed_at'])) : 'Current'; ?></td>
+          <td>
+            <?php if (!empty($st['settled_at'])): ?>
+              <span class="green_check">✓</span>
+            <?php endif; ?>
+          </td>
+          <td>
+            <?php if (!empty($st['settled_at'])): ?>
+              <?php echo date('m/d/Y', strtotime($st['settled_at'])); ?>
+            <?php endif; ?>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+</div>

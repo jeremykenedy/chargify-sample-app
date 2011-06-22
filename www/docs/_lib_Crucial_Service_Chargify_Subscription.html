@@ -1,0 +1,1405 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">lib/Crucial/Service/Chargify/Subscription.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>category</dt>
+<dd>Crucial</dd>
+<dt>copyright</dt>
+<dd>Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)</dd>
+<dt>license</dt>
+<dd>New BSD License</dd>
+<dt>link</dt>
+<dd>http://www.crucialwebstudio.com</dd>
+<dt>package</dt>
+<dd>Crucial_Service_Chargify</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CCrucial_Service_Chargify_Subscription">Crucial_Service_Chargify_Subscription</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">Chargify Sample App</p>
+<div class="long-description"><p>LICENSE</p>
+
+<p>This source file is subject to the new BSD license that is bundled
+with this package in the file LICENSE.txt.</p>
+
+<p>If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to dan@crucialwebstudio.com so we can send you a copy immediately.</p>
+</div>
+<a name="classes"></a><a id="\Crucial_Service_Chargify_Subscription"></a><h2 class="class">\Crucial_Service_Chargify_Subscription<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_lib_Crucial_Service_Chargify_Abstract.html#%5CCrucial_Service_Chargify_Abstract">\Crucial_Service_Chargify_Abstract</a></dd>
+<dt>category</dt>
+<dd>Crucial</dd>
+<dt>copyright</dt>
+<dd>Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)</dd>
+<dt>license</dt>
+<dd>New BSD License</dd>
+<dt>link</dt>
+<dd>http://www.crucialwebstudio.com</dd>
+<dt>package</dt>
+<dd>Crucial_Service_Chargify</dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setProductHandle()">setProductHandle</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setProductId()">setProductId</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setCustomerId()">setCustomerId</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setCustomerReference()">setCustomerReference</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setComponents()">setComponents</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setCustomerAttributes()">setCustomerAttributes</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setPaymentProfileAttributes()">setPaymentProfileAttributes</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setCancellationMessage()">setCancellationMessage</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setCancelAtEndOfPeriod()">setCancelAtEndOfPeriod</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setNextbillingAt()">setNextbillingAt</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setIncludeInitialCharge()">setIncludeInitialCharge</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setIncludeTrial()">setIncludeTrial</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setCouponCode()">setCouponCode</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setPage()">setPage</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::setPerPage()">setPerPage</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::read()">read</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::create()">create</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::cancelImmediately()">cancelImmediately</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::cancelDelayed()">cancelDelayed</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::reactivate()">reactivate</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::resetBalance()">resetBalance</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::update()">update</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::migrate()">migrate</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::listSubscriptions()">listSubscriptions</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Subscription::listByCustomer()">listByCustomer</a></dd>
+<dd><a class="method protected" href="#%5CCrucial_Service_Chargify_Subscription::_normalizeResponseArray()">_normalizeResponseArray</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Chargify Sample App</p>
+<div class="long-description"><p>LICENSE</p>
+
+<p>This source file is subject to the new BSD license that is bundled
+with this package in the file LICENSE.txt.</p>
+
+<p>If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to dan@crucialwebstudio.com so we can send you a copy immediately.</p>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Crucial_Service_Chargify_Subscription::_normalizeResponseArray()"></a><h4 class="method protected">_normalizeResponseArray<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_normalizeResponseArray</span><span class="nb-faded-text">(
+          \array $responseArray
+          )
+        </span>
+        :
+        \array</code><p class="short-description">When returning multiple products the array is different depending on which
+format (xml/json) you are using. This normalizes the array for us so we can
+rely on a consistent structure.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$responseArray</dt>
+<dd>\array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::cancelDelayed()"></a><h4 class="method public">cancelDelayed<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">cancelDelayed</span><span class="nb-faded-text">(
+          \int $id
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Set the subscription to be canceled at the end of the current billing period.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$id</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setCancelAtEndOfPeriod()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setCancellationMessage()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::cancelImmediately()"></a><h4 class="method public">cancelImmediately<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">cancelImmediately</span><span class="nb-faded-text">(
+          \int $id
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Set the given subscription ID to be canceled immediately</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$id</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setCancellationMessage()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::create()"></a><h4 class="method public">create<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">create</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Create a new subscription.</p>
+<div class="long-description"><p>NOTE: Refunds are currently only suppoerted by the Authorize.net payment
+gateway.</p>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>link</dt>
+<dd>http://docs.chargify_Subscription.com/api-subscriptions</dd>
+<dt>link</dt>
+<dd>http://docs.chargify.com/api-coupons</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setProductHandle()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setProductId()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setCustomerId()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setCustomerAttributes()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setPaymentProfileAttributes()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setCouponCode()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setCustomerReference()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setNextBillingAt()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::listByCustomer()"></a><h4 class="method public">listByCustomer<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">listByCustomer</span><span class="nb-faded-text">(
+          \int $customerId
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">List subscriptions by customer ID</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$customerId</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setCustomerId()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::listSubscriptions()"></a><h4 class="method public">listSubscriptions<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">listSubscriptions</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Listing subscriptions is paginated, 2000 at a time, by default. They are
+listed most recently created first. You may control pagination using the
+"page" and/or "per_page" parameters.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setPage()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setPerPage()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::migrate()"></a><h4 class="method public">migrate<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">migrate</span><span class="nb-faded-text">(
+          \int $id
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">The Chargify API allows you initiate an upgrade/downgrade by posting JSON or XML that includes:
+product_id or
+product_handle
+  The ID or handle of the Product that the subscription will migrate to
+include_trial
+  Boolean, default 0. If 1 is sent the customer will migrate to the new product with a
+  trial if one is available. If 0 is sent, the trial period will be ignored.</p>
+<div class="long-description"><p>include_initial_charge
+  Boolean, default 0. If 1 is sent initial charges will be assessed. If 0 is
+  sent initial charges will be ignored.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$id</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>link</dt>
+<dd>http://docs.chargify.com/api-migrations</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setProductId()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setProductHandle()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setIncludeTrial()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setIncludeInitialCharge()</dd>
+<dt>todo</dt>
+<dd>?? should this be moved to Crucial_Service_Chargify_Migration</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::reactivate()"></a><h4 class="method public">reactivate<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">reactivate</span><span class="nb-faded-text">(
+          \int $id
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Reactivate the given subscription ID</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$id</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setIncludeTrial()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::read()"></a><h4 class="method public">read<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">read</span><span class="nb-faded-text">(
+          \int $subscriptionId
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Get subscription data for given subscription ID</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$subscriptionId</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::resetBalance()"></a><h4 class="method public">resetBalance<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">resetBalance</span><span class="nb-faded-text">(
+          \int $subscriptionId
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Chargify offers the ability to easily reset the balance of a subscription
+to zero. If a subscription has a positive balance, this API call will
+issue a credit to the subscription for the outstanding balance. This
+is particularly helpful if you want to reactivate a canceled subscription
+without charging the customer for their previously owed balance.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$subscriptionId</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setCancelAtEndOfPeriod()"></a><h4 class="method public">setCancelAtEndOfPeriod<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setCancelAtEndOfPeriod</span><span class="nb-faded-text">(
+          \bool $bool
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">(Required when using cancelDelayed() ) Set the subscription to be cancelled at the end of the current
+billing period.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$bool</dt>
+<dd>\bool<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setCancellationMessage()"></a><h4 class="method public">setCancellationMessage<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setCancellationMessage</span><span class="nb-faded-text">(
+          \string $message
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">(Optional) Can be used when canceling a subscription (via the HTTP DELETE
+method) to make a note about the reason for cancellation.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$message</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setComponents()"></a><h4 class="method public">setComponents<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setComponents</span><span class="nb-faded-text">(
+          \array $components
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Array containing component IDs and quantities for components to be added
+at subscription creation time. Array should look like this:</p>
+<div class="long-description"><p>array(
+ array('component_id' => $id, 'allocated_quantity' => $quantity),
+ array('component_id' => $id, 'allocated_quantity' => $quantity),
+)</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$components</dt>
+<dd>\array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>todo</dt>
+<dd>Unit test this</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setCouponCode()"></a><h4 class="method public">setCouponCode<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setCouponCode</span><span class="nb-faded-text">(
+          \string $coupon_code
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Enter description here...</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$coupon_code</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>link</dt>
+<dd>http://docs.chargify.com/api-coupons</dd>
+<dt>todo</dt>
+<dd>Unit test this</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setCustomerAttributes()"></a><h4 class="method public">setCustomerAttributes<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setCustomerAttributes</span><span class="nb-faded-text">(
+          \array $attributes
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Set the attributes for the customer. Useful when creating customer and
+subscription at the same time.</p>
+<div class="long-description"><p>Possible array keys:</p>
+
+<p>first_name
+The first name of the customer. Required when creating a customer via
+attributes.</p>
+
+<p>last_name
+The last name of the customer. Required when creating a customer via
+attributes.</p>
+
+<p>email
+The email address of the customer. Required when creating a customer via
+attributes.</p>
+
+<p>organization
+The organization/company of the customer. Optional.</p>
+
+<p>reference
+A customer “reference”, or unique identifier from your app, stored in
+Chargify. Can be used so that you may reference your customers within
+Chargify using the same unique value you use in your application. Optional.</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$attributes</dt>
+<dd>\array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setCustomerId()"></a><h4 class="method public">setCustomerId<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setCustomerId</span><span class="nb-faded-text">(
+          \string|\int $idFromChargify
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">The ID of an existing customer within Chargify. Required, unless a
+customer_reference or a set of customer_attributes is given.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$idFromChargify</dt>
+<dd>\string\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setCustomerReference()"></a><h4 class="method public">setCustomerReference<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setCustomerReference</span><span class="nb-faded-text">(
+          \string|\int $idFromYourApp
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">The reference value (provided by your app) of an existing customer within
+Chargify. Required, unless a customer_id or a set of customer_attributes
+is given.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$idFromYourApp</dt>
+<dd>\string\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setIncludeInitialCharge()"></a><h4 class="method public">setIncludeInitialCharge<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setIncludeInitialCharge</span><span class="nb-faded-text">(
+          \int $initialCharge
+              =
+              0
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Boolean, default 0. If 1 is sent initial charges will be assessed. If 0 is
+  sent initial charges will be ignored.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$initialCharge</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setIncludeTrial()"></a><h4 class="method public">setIncludeTrial<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setIncludeTrial</span><span class="nb-faded-text">(
+          \int $includeTrial
+              =
+              0
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Boolean, default 0. If 1 is sent the customer will migrate to the new product with a
+  trial if one is available. If 0 is sent, the trial period will be ignored.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$includeTrial</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setNextbillingAt()"></a><h4 class="method public">setNextbillingAt<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setNextbillingAt</span><span class="nb-faded-text">(
+          \string $nextBilling
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">(Optional, used for Subscription Import) Set this attribute to a future
+date/time to sync imported subscriptions to your existing renewal
+schedule. See the notes on “Date/Time Format” below. If you provide a
+next_billing_at timestamp that is in the future, no trial or initial
+charges will be applied when you create the subscription. In fact, no
+payment will be captured at all. The first payment will be captured,
+according to the prices defined by the product, near the time specified
+by next_billing_at. If you do not provide a value for next_billing_at,
+any trial and/or initial charges will be assessed and charged at the time
+of subscription creation. If the card cannot be successfully charged, the
+subscription will not be created.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$nextBilling</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setPage()"></a><h4 class="method public">setPage<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setPage</span><span class="nb-faded-text">(
+          \int $page
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">An integer value which specifies which page of results to fetch, starting
+at 1. Fetching successively higher page numbers will return additional
+results, until there are no more results to return (in which case an empty
+result set will be returned). Defaults to 1.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$page</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setPaymentProfileAttributes()"></a><h4 class="method public">setPaymentProfileAttributes<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setPaymentProfileAttributes</span><span class="nb-faded-text">(
+          \array $attributes
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Set payment profile attributes. Useful when accepting (or requiring) a
+credit card at signup.</p>
+<div class="long-description"><p>Possible array keys:</p>
+
+<p>first_name
+(Optional) First name on card. If omitted, the first_name from customer
+attributes will be used.</p>
+
+<p>last_name
+(Optional) Last name on card. If omitted, the last_name from customer
+attributes will be used.</p>
+
+<p>full_number
+The full credit card number (string representation, i.e.
+“5424000000000015”)</p>
+
+<p>expiration_month
+(Optional when performing a Subscription Import via <code>vault_token</code>,
+required otherwise) The 1- or 2-digit credit card expiration month, as an
+integer or string, i.e. “5”</p>
+
+<p>expiration_year
+(Optional when performing a Subscription Import via <code>vault_token</code>,
+required otherwise) The 4-digit credit card expiration year, as an integer
+or string, i.e. “2012”</p>
+
+<p>cvv
+(Optional, may be required by your gateway settings) The 3- or 4-digit
+Card Verification Value. This value is merely passed through to the
+payment gateway.</p>
+
+<p>billing_address
+(Optional, may be required by your product configuration or gateway
+settings) The credit card billing street address (i.e. “123 Main St.”).
+This value is merely passed through to the payment gateway.</p>
+
+<p>billing_city
+(Optional, may be required by your product configuration or gateway
+settings) The credit card billing address city (i.e. “Boston”). This
+value is merely passed through to the payment gateway.</p>
+
+<p>billing_state
+(Optional, may be required by your product configuration or gateway
+settings) The credit card billing address state (i.e. “MA”). This value is
+merely passed through to the payment gateway.</p>
+
+<p>billing_zip
+(Optional, may be required by your product configuration or gateway
+settings) The credit card billing address zip code (i.e. “12345”). This
+value is merely passed through to the payment gateway.</p>
+
+<p>billing_country
+(Optional, may be required by your product configuration or gateway
+settings) The credit card billing address country, preferably in
+<a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>
+format (i.e. “US”). This value is merely passed through to the payment
+gateway. Some gateways require country codes in a specific format. Please
+check your gateway’s documentation.</p>
+
+<p>vault_token
+(Optional, used only for Subscription Import) The “token” provided by your
+vault storage for an already stored payment profile</p>
+
+<p>customer_vault_token
+(Optional, used only for Subscription Import) (only for Authorize.Net CIM
+storage) The customerProfileId for the owner of the
+customerPaymentProfileId provided as the vault_token</p>
+
+<p>current_vault
+(Optional, used only for Subscription Import) The vault that stores the
+payment profile with the provided vault_token. May be authorizenet,
+trust_commerce, payment_express, beanstream, or braintree1</p>
+
+<p>last_four
+(Optional, used only for Subscription Import) If you have the last 4
+digits of the credit card number, you may supply them here so that we may
+create a masked card number (i.e. ‘XXXX-XXXX-XXXX-1234’) for display in
+the UI</p>
+
+<p>card_type
+(Optional, used only for Subscription Import) If you know the card type
+(i.e. Visa, MC, etc) you may supply it here so that we may display the
+card type in the UI. May be visa, master, discover, american_express,
+diners_club, jcb, switch, solo, dankort, maestro, forbrugsforeningen, orlaser</p>
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$attributes</dt>
+<dd>\array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setPerPage()"></a><h4 class="method public">setPerPage<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setPerPage</span><span class="nb-faded-text">(
+          \int $perPage
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">How many records to fetch in each request, defaults to 2000. Note:
+fetching subscriptions is currently unoptimized, so fetching large batches
+of subscriptions will be a slow operation.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$perPage</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setProductHandle()"></a><h4 class="method public">setProductHandle<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setProductHandle</span><span class="nb-faded-text">(
+          \string $handle
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">The API Handle of the product for which you are creating a subscription
+or migrating to. Required, unless a product_id is given instead.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$handle</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::setProductId()"></a><h4 class="method public">setProductId<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setProductId</span><span class="nb-faded-text">(
+          \string|\int $id
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">The ID of the Product that the subscription will migrate to.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$id</dt>
+<dd>\string\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Subscription::update()"></a><h4 class="method public">update<div class="to-top"><a href="#Crucial_Service_Chargify_Subscription">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">update</span><span class="nb-faded-text">(
+          \int $id
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></code><p class="short-description">Update the given subscription ID</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$id</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Subscription.html#%5CCrucial_Service_Chargify_Subscription">\Crucial_Service_Chargify_Subscription</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setProductHandle()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setCustomerAttributes()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Subscription::setPaymentProfileAttributes()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.0</a>.
+    </small></body></html>

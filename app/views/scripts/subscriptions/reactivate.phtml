@@ -1,0 +1,65 @@
+<h2>Reactivate Subscription</h2>
+<table class="vertical">
+  <tbody>
+    <tr>
+      <th>Customer</th>
+      <td><a href="/customers/read/customer-id/<?php echo $this->sub['customer']['id'] ?>"><?php echo $this->sub['customer']['first_name'] ?> <?php echo $this->sub['customer']['last_name'] ?></a><?php echo !empty($this->sub['customer']['organization']) ? ' (' . $this->sub['customer']['organization'] . ')' : ''; ?></td>
+    </tr>
+    <tr>
+      <th>Product</th>
+      <td>(<?php echo $this->sub['product']['product_family']['name'] ?>) <?php echo $this->sub['product']['name'] ?></td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td><?php echo $this->sub['state'] ?></td>
+    </tr>
+    <tr>
+      <th>Credit Card</th>
+      <td>
+        <?php if (!empty($this->sub['credit_card'])) :?>
+          <?php echo $this->sub['credit_card']['masked_card_number'] ?> <?php echo $this->sub['credit_card']['card_type'] ?> (exp. <?php echo $this->sub['credit_card']['expiration_month'] ?>/<?php echo $this->sub['credit_card']['expiration_year'] ?>)
+        <?php else: ?>
+          None on file
+        <?php endif; ?>
+        <br /><a href="/subscriptions/edit-payment-profile/subscription-id/<?php echo $this->sub['id'] ?>">Update Payment Profile</a>
+      </td>
+    </tr>
+    <tr>
+      <th>Price</th>
+      <td>$<?php echo number_format($this->sub['product']['price_in_cents'] / 100, 2) ?> every <?php echo $this->sub['product']['interval'] ?> <?php echo $this->sub['product']['interval_unit'] ?></td>
+    </tr>
+    <tr>
+      <th>Signed Up At</th>
+      <td><?php echo date('m/d/Y', strtotime($this->sub['created_at'])) ?></td>
+    </tr>
+    <tr>
+      <th>Canceled At</th>
+      <td><?php echo date('m/d/Y', strtotime($this->sub['canceled_at'])) ?></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>What's going to happen?</strong></p>
+<ul class="bulleted">
+  <li>This subscription will be immediately activated.</li>
+  <li>
+    The customer will be charged
+    $<?php echo number_format($this->sub['product']['price_in_cents'] / 100, 2) ?>
+    for
+    (<?php echo $this->sub['product']['product_family']['name'] ?>) <?php echo $this->sub['product']['name'] ?>
+  </li>
+  <li>
+    The customer's billing date is reset to today.
+  </li>
+  <li>
+    Currently, <strong>no</strong> email is sent to your customer.
+    (<a target="_blank" href="http://help.chargify.com">Send us feedback</a> if this is an option you would like to see in Chargify.)
+  </li>
+  <li>
+    <strong>There is no "undo" at this time, so please be sure before you press the "Reactivate Subscription" button.</strong>
+  </li>
+</ul>
+
+<form method="post" action="">
+  <input type="submit" name="reactivate" value="Reactivate Subscription" /> of <a href="/subscriptions/read/subscription-id/<?php echo $this->sub['id'] ?>">Go Back</a>
+</form>

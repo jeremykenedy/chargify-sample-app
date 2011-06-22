@@ -1,0 +1,51 @@
+<h2>Change Product</h2>
+<p><strong>Changing the product has the following effects:</strong></p>
+<ul class="prorate-details">
+  <li><strong>No proration is done</strong> - your customer is not charged or credited at this time (if you wish to have proration, then perform an <a href="/subscriptions/migrate/subscription-id/<?php echo $this->sub['id'] ?>">upgrade/downgrade migration</a>)</li>
+  <li>The selected product <strong>immediately</strong> becomes the current product listed in the Chargify API and UI</li>
+  <li>The period will not be affected</li>
+  <li>The new product's charges will be <strong>assessed at the start of the next period</strong> (<?php echo date('m/d/Y', strtotime($this->sub['next_assessment_at'])) ?>)</li>
+</ul>
+
+<table id="migration_matrix">
+  <thead>
+    <tr>
+      <th></th>
+      <?php foreach ($this->prods as $prod): ?>
+        <th class="<?php echo ($this->sub['product']['id'] == $prod['id']) ? 'current' : ''; ?>"><?php echo $prod['name'] ?></th>
+      <?php endforeach; ?>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Pricing Details</td>
+      <?php foreach ($this->prods as $prod): ?>
+        <td class="<?php echo ($this->sub['product']['id'] == $prod['id']) ? 'current' : ''; ?>">
+          $<?php echo number_format($prod['price_in_cents'] / 100, 2) ?><span class="subtle"> every <?php echo $prod['interval'] ?> <?php echo $prod['interval_unit'] ?></span>
+          <br /> $<?php echo number_format($prod['initial_charge_in_cents'] / 100, 2) ?> <span class="subtle">Setup Fee</span>
+          <br />
+          <?php if (!empty($prod['trial_interval'])): ?>
+            $<?php echo number_format($prod['trial_price_in_cents'] / 100, 2) ?> <span class="subtle"><?php echo $prod['trial_interval'] ?> <?php echo $prod['trial_interval_unit'] ?> Trial</span>
+          <?php else: ?>
+            No <span class="subtle">Trial</span>
+          <?php endif; ?>
+        </td>
+      <?php endforeach; ?>
+    </tr>
+    <tr>
+      <td></td>
+      <?php foreach ($this->prods as $prod): ?>
+        <td class="<?php echo ($this->sub['product']['id'] == $prod['id']) ? 'current' : ''; ?>">
+          <?php if ($this->sub['product']['id'] != $prod['id']): ?>
+            <form class="button-to" method="post" action="">
+              <div>
+                <input type="hidden" name="product_id" value="<?php echo $prod['id'] ?>" />
+                <input type="submit" value="Change to <?php echo $this->escape($prod['name']) ?>">
+              </div>
+            </form>
+          <?php endif; ?>
+        </td>
+      <?php endforeach; ?>
+    </tr>
+  </tbody>
+</table>

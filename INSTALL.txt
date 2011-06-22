@@ -1,0 +1,39 @@
+The following instructions are for Ubuntu.
+
+  * Extract the package to a directory on your development web server. This 
+    directory will be referred to as {APP_PATH} in the instructions below.
+    
+  * Modify the provided {APP_PATH}/app/configs/chargify.ini.dist configuration 
+    file to suit your needs. Rename it to chargify.ini
+    
+  * For Zferral integration, modify the provided 
+    {APP_PATH}/app/configs/zferral.ini.dist configuration file to suit your 
+    needs. Rename it to zferral.ini
+    
+  * Add write permissions to the tmp folder. PHP errors, Webhooks and Postbacks 
+    will be logged here.
+    
+    chmod 777 {APP_PATH}/tmp
+    
+    You are only doing this on a private development server, right??
+  
+  * Modify the provided apache-vhost to suit your needs and install.
+  
+    cd /etc/apache2/sites-available
+    nano chargify.dev (paste in your modified apache-vhost)
+    a2ensite chargify.dev
+  
+  * Restart apache:
+  
+    /etc/init.d/apache2 restart
+  
+  * Modify your hosts file (you are doing this on a development machine right?)
+  
+    nano /etc/hosts
+    type the following on a new line:
+    127.0.0.1 chargify.dev
+    
+  * Browse to your new site. If you used the default vhost, open 
+    http://chargify.dev in your web browser.
+    
+  * Extract {APP_PATH}/www/docs.tar.gz to view DocBlox API doucmentation.

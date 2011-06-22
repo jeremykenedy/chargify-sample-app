@@ -1,0 +1,943 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/black-tie/jquery-ui-1.8.2.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script>
+      $(document).ready(function() {
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().css('cursor', 'pointer');
+        $('dl.function-info, dl.constant-info, dl.property-info').prev().click(function() {
+          if ($(this).next().is(':hidden'))
+          {
+            $(this).children('img')[0].src = 'images/arrow_down.gif';
+          } else
+          {
+            $(this).children('img')[0].src = 'images/arrow_right.gif';
+          }
+          $(this).next().slideToggle();
+        });
+      $('dl.function-info, dl.constant-info, dl.property-info').hide();
+      $('dl.function-info img, dl.constant-info img, dl.property-info img').show();
+      });
+    </script><a name="top"></a><h1 class="file">lib/Crucial/Service/Chargify/Customer.php</h1>
+<div class="file_menu">
+<a href="#classes">Classes</a> </div>
+<dl class="file-info">
+<dt>category</dt>
+<dd>Crucial</dd>
+<dt>copyright</dt>
+<dd>Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)</dd>
+<dt>license</dt>
+<dd>New BSD License</dd>
+<dt>link</dt>
+<dd>http://www.crucialwebstudio.com</dd>
+<dt>package</dt>
+<dd>Crucial_Service_Chargify</dd>
+<dt>Classes</dt>
+<dd><a class="class" href="#%5CCrucial_Service_Chargify_Customer">Crucial_Service_Chargify_Customer</a></dd>
+</dl>
+<h2>Description</h2>
+<p class="short-description">Chargify Sample App</p>
+<div class="long-description"><p>LICENSE</p>
+
+<p>This source file is subject to the new BSD license that is bundled
+with this package in the file LICENSE.txt.</p>
+
+<p>If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to dan@crucialwebstudio.com so we can send you a copy immediately.</p>
+</div>
+<a name="classes"></a><a id="\Crucial_Service_Chargify_Customer"></a><h2 class="class">\Crucial_Service_Chargify_Customer<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div class="class">
+<dl class="class-info">
+<dt>Extends from</dt>
+<dd><a href="_lib_Crucial_Service_Chargify_Abstract.html#%5CCrucial_Service_Chargify_Abstract">\Crucial_Service_Chargify_Abstract</a></dd>
+<dt>category</dt>
+<dd>Crucial</dd>
+<dt>copyright</dt>
+<dd>Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)</dd>
+<dt>license</dt>
+<dd>New BSD License</dd>
+<dt>link</dt>
+<dd>http://www.crucialwebstudio.com</dd>
+<dt>package</dt>
+<dd>Crucial_Service_Chargify</dd>
+<dt>Methods</dt>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setFirstName()">setFirstName</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setLastName()">setLastName</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setEmail()">setEmail</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setOrganization()">setOrganization</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setPhone()">setPhone</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setAddress()">setAddress</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setAddress2()">setAddress2</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setCountry()">setCountry</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setState()">setState</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setCity()">setCity</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setZip()">setZip</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setReference()">setReference</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::setPage()">setPage</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::create()">create</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::listCustomers()">listCustomers</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::readByChargifyId()">readByChargifyId</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::readByReference()">readByReference</a></dd>
+<dd><a class="method public" href="#%5CCrucial_Service_Chargify_Customer::update()">update</a></dd>
+<dd><a class="method protected" href="#%5CCrucial_Service_Chargify_Customer::_normalizeResponseArray()">_normalizeResponseArray</a></dd>
+</dl>
+<h3>Description</h3>
+<p class="short-description">Chargify Sample App</p>
+<div class="long-description"><p>LICENSE</p>
+
+<p>This source file is subject to the new BSD license that is bundled
+with this package in the file LICENSE.txt.</p>
+
+<p>If you did not receive a copy of the license and are unable to
+obtain it through the world-wide-web, please send an email
+to dan@crucialwebstudio.com so we can send you a copy immediately.</p>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Crucial_Service_Chargify_Customer::_normalizeResponseArray()"></a><h4 class="method protected">_normalizeResponseArray<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">_normalizeResponseArray</span><span class="nb-faded-text">(
+          \array $responseArray
+          )
+        </span>
+        :
+        \array</code><p class="short-description">When returning multiple products the array is different depending on which
+format (xml/json) you are using. This normalizes the array for us so we can
+rely on a consistent structure.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$responseArray</dt>
+<dd>\array<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt>\array</dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>protected</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::create()"></a><h4 class="method public">create<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">create</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">Create a new customer</p>
+<div class="long-description"><p>NOTE: Refunds are currently only suppoerted by the Authorize.net payment
+gateway.</p>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setFirstName()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setLastName()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setEmail()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setOrganization()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setPhone()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setAddress()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setAddress2()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setCity()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setState()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setZip()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setCountry()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setReference()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::listCustomers()"></a><h4 class="method public">listCustomers<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">listCustomers</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">List all customers for a site</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setPage()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::readByChargifyId()"></a><h4 class="method public">readByChargifyId<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">readByChargifyId</span><span class="nb-faded-text">(
+          \int $id
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">Read the customer data for the given Chargify ID</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$id</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::readByReference()"></a><h4 class="method public">readByReference<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">readByReference</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">Read the customer data for the given reference (from your app)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setReference()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setAddress()"></a><h4 class="method public">setAddress<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setAddress</span><span class="nb-faded-text">(
+          \string $address
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Optional) Address</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$address</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setAddress2()"></a><h4 class="method public">setAddress2<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setAddress2</span><span class="nb-faded-text">(
+          \string $address
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Optional) Address2</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$address</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setCity()"></a><h4 class="method public">setCity<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setCity</span><span class="nb-faded-text">(
+          \string $city
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Optional) City</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$city</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setCountry()"></a><h4 class="method public">setCountry<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setCountry</span><span class="nb-faded-text">(
+          \string $country
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Optional) Country</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$country</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setEmail()"></a><h4 class="method public">setEmail<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setEmail</span><span class="nb-faded-text">(
+          \string $email
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Required)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$email</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setFirstName()"></a><h4 class="method public">setFirstName<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setFirstName</span><span class="nb-faded-text">(
+          \string $firstName
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Required)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$firstName</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setLastName()"></a><h4 class="method public">setLastName<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setLastName</span><span class="nb-faded-text">(
+          \string $lastName
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Required)</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$lastName</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setOrganization()"></a><h4 class="method public">setOrganization<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setOrganization</span><span class="nb-faded-text">(
+          \string $organization
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Optional) Company/Organization name</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$organization</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setPage()"></a><h4 class="method public">setPage<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setPage</span><span class="nb-faded-text">(
+          \int $page
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">The 'page' parameter. Used when listing customers since you can only get 50
+at a time.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$page</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setPhone()"></a><h4 class="method public">setPhone<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setPhone</span><span class="nb-faded-text">(
+          \string $phone
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Optional) Phone</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$phone</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setReference()"></a><h4 class="method public">setReference<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setReference</span><span class="nb-faded-text">(
+          \string|\int $reference
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Optional, but encouraged) The unique identifier used within your own
+application for this customer</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$reference</dt>
+<dd>\string\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setState()"></a><h4 class="method public">setState<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setState</span><span class="nb-faded-text">(
+          \string $state
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Optional) State</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$state</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::setZip()"></a><h4 class="method public">setZip<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">setZip</span><span class="nb-faded-text">(
+          \string $zip
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">(Optional) Zip</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$zip</dt>
+<dd>\string<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+<a id="\Crucial_Service_Chargify_Customer::update()"></a><h4 class="method public">update<div class="to-top"><a href="#Crucial_Service_Chargify_Customer">jump to class</a></div>
+</h4>
+<div class="method">
+<code><span class="highlight">update</span><span class="nb-faded-text">(
+          \int $id
+          )
+        </span>
+        :
+        <a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></code><p class="short-description">Update the customer record in Chargify.</p>
+<div class="long-description">
+</div>
+<div class="api-section">
+<h5 class="arguments">Arguments</h5>
+<dl class="argument-info">
+<dt>$id</dt>
+<dd>\int<br><em></em>
+</dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="output">Output</h5>
+<dl class="return-info">
+<dt><a href="_lib_Crucial_Service_Chargify_Customer.html#%5CCrucial_Service_Chargify_Customer">\Crucial_Service_Chargify_Customer</a></dt>
+<dd><em></em></dd>
+</dl>
+<div class="clear"></div>
+</div>
+<div class="api-section">
+<h5 class="info">
+<img src="images/arrow_right.gif"> Details</h5>
+<dl class="function-info">
+<dt>visibility</dt>
+<dd>public</dd>
+<dt>final</dt>
+<dd>false</dd>
+<dt>static</dt>
+<dd>false</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setFirstName()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setLastName()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setEmail()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setOrganization()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setPhone()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setAddress()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setAddress2()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setCity()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setState()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setZip()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setCountry()</dd>
+<dt>see</dt>
+<dd>Crucial_Service_Chargify_Customer::setReference()</dd>
+</dl>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.11.0</a>.
+    </small></body></html>

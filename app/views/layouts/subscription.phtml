@@ -1,0 +1,73 @@
+<?php echo $this->doctype() ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--
+  This Chargify Sample App developed by Crucial Web Studio
+  
+  http://www.crucialwebstudio.com
+-->
+
+<head>
+  <?php echo $this->headTitle() ?>
+  
+  <?php echo $this->headMeta() ?>
+  
+  <link href="/css/reset.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/css/global.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <!--[if lt IE 8]><link href="/css/blueprint/ie.css" media="screen, projection" rel="stylesheet" type="text/css" /><![endif]-->
+  <link href="/css/application.css" media="screen" rel="stylesheet" type="text/css" />
+  <?php echo $this->headLink() ?>
+  
+  <?php echo $this->headStyle() ?>
+  
+  <script src="/js/jquery-all.js" type="text/javascript"></script>
+  <script src="/js/application.js" type="text/javascript"></script>
+  <?php echo $this->headScript() ?>
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+</head>
+
+<body class="subscriptions">
+  <div id="app_header_user_info_bar">
+      <div class="container">
+          <div id="header_logo" style="float:left;margin-right:12px;">
+            <h1>Sample App</h1>
+          </div>
+          <?php echo $this->render('_partials/miniNav.phtml') ?>
+      </div>
+  </div>
+  <div id="app_navigation_wrapper">
+      <div id="app_navigation_inner">
+          <div class="container">
+              <?php echo $this->render('_partials/mainNav.phtml') ?>
+          </div>
+      </div>
+  </div>
+  <div id="app_content_wrapper">
+      <div class="container">
+          <div id="app_content">
+          
+            <div class="clearfix two_col_left_sidebar">
+              <div class="sidebar">
+                  <?php echo $this->render('_partials/subSidebar.phtml') ?>
+              </div>
+              
+              <div class="main">
+                <?php echo $this->render('_partials/subHeader.phtml') ?>
+                <?php echo $this->layout()->content ?>
+              </div> <!-- /main -->
+            </div> <!-- /two_col_left_sidebar -->
+            
+          </div>
+      </div>
+  </div>
+  <div id="app_footer_wrapper">
+      <div class="container">
+          <div id="footer">
+              <?php echo $this->render('_partials/footer.phtml') ?>
+          </div>
+      </div>
+  </div>
+</body>
+
+</html>

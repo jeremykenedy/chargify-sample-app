@@ -1,0 +1,36 @@
+<h2>Toggle &quot;<?php echo $this->comp['name'] ?>&quot;</h2>
+
+<form method="post" id="new_allocation" class="formtastic allocation" action="">
+  <fieldset class="inputs">
+    <ol>
+      <li id="allocation_quantity_input" class="radio required">
+        <fieldset>
+          <legend class="label">
+            <label for="allocation_quantity_1">Toggle the component 'On' or 'Off'<abbr title="required">*</abbr></label>
+          </legend>
+          <ol>
+            <li>
+              <label for="allocation_quantity_1">
+                <input type="radio" value="1" name="allocation[quantity]" id="allocation_quantity_1"<?php echo (TRUE == $this->comp['enabled']) ? ' checked="checked"' : ''; ?>> On
+              </label>
+            </li>
+            <li>
+              <label for="allocation_quantity_0">
+                <input type="radio" value="0" name="allocation[quantity]" id="allocation_quantity_0"<?php echo (FALSE == $this->comp['enabled']) ? ' checked="checked"' : ''; ?>> Off
+              </label>
+            </li>
+          </ol>
+        </fieldset>
+      </li>
+      <li id="allocation_memo_input" class="text optional">
+        <label for="allocation_memo">Memo</label>
+        <textarea rows="4" name="allocation[memo]" id="allocation_memo" cols="40"></textarea>
+        <p class="inline-hints">Add a note</p>
+      </li>
+    </ol>
+  </fieldset>
+  
+  <input type="submit" value="Update" name="commit" id="record_allocation_button" class="app-submit-button">
+  or
+  <a href="/subscriptions/list-components/subscription-id/<?php echo $this->sub['id'] ?>">Cancel</a>
+</form>
