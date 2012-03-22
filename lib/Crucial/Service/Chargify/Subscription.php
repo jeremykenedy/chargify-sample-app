@@ -462,19 +462,19 @@ class Crucial_Service_Chargify_Subscription extends Crucial_Service_Chargify_Abs
   {
     $service = $this->getService();
 
-    // this PUT request accepts a query string of 'include_trial' which can't currently be
-    // set correctly in our request() method.
+    // this PUT request accepts a query string of 'include_trial'
+    $params = array();
     $includeTrial = $this->getParam('include_trial');
     if (is_int($includeTrial))
     {
-      $service->getHttpClient()->setParameterGet('include_trial', $includeTrial);
+      $params['include_trial'] = $includeTrial;
     }
 
-    $response = $service->request('subscriptions/' . (int)$id . '/reactivate', 'PUT', '');
+    $response = $service->request('subscriptions/' . (int)$id . '/reactivate', 'PUT', '', $params);
     $responseArray = $this->getResponseArray($response);
 
     $code = $response->getStatus();
-    
+
     /**
      * add some more errors for a bad response code. errors will be in the body of the response
      *

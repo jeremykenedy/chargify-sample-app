@@ -8,21 +8,21 @@ require_once('ChargifyController.php');
  *
  * This source file is subject to the new BSD license that is bundled
  * with this package in the file LICENSE.txt.
- * 
+ *
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to dan@crucialwebstudio.com so we can send you a copy immediately.
- * 
+ *
  * @category App
  * @package Controllers
  * @copyright Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)
  * @license New BSD License
  */
-class SubscriptionsController extends ChargifyController 
+class SubscriptionsController extends ChargifyController
 {
   /**
    * Standard preDispatch() hook
-   * 
+   *
    * Simply changes the layout for displaying subscriptions.
    *
    */
@@ -31,7 +31,7 @@ class SubscriptionsController extends ChargifyController
     parent::preDispatch();
     $this->_helper->layout()->setLayout('subscription');
   }
-  
+
   /**
    * Read the details of a specific subscription
    *
@@ -39,21 +39,21 @@ class SubscriptionsController extends ChargifyController
   public function readAction()
   {
     $id = $this->getRequest()->getParam('subscription-id');
-    
+
     $service = $this->_getChargify();
-    
+
     $sub = $service->subscription()->read($id);
     $this->view->sub = $sub;
-    
+
     $subs = $service->subscription()->listByCustomer($sub['customer']['id']);
     $this->view->subs = $subs;
-    
+
     $this->view->headTitle('Subscription Summary');
-    
+
     $this->log($sub);
     $this->log($subs);
   }
-  
+
   /**
    * List the components for a specific subscription
    *
@@ -61,18 +61,18 @@ class SubscriptionsController extends ChargifyController
   public function listComponentsAction()
   {
     $id = $this->getRequest()->getParam('subscription-id');
-    
+
     $service = $this->_getChargify();
-    
+
     $sub = $service->subscription()->read($id);
     $this->view->sub = $sub;
-    
+
     $comps = $service->component()->listSubscription($id);
     $this->view->comps = $comps;
-    
+
     $this->log($comps);
   }
-  
+
   /**
    * Change the product for a subscription without proration
    *
@@ -80,22 +80,22 @@ class SubscriptionsController extends ChargifyController
   public function editAction()
   {
     $id = $this->getRequest()->getParam('subscription-id');
-    
+
     $service = $this->_getChargify();
-    
+
     if ($this->getRequest()->isPost())
     {
       $service->subscription()
               ->setProductId($_POST['product_id'])
               ->update($id);
     }
-    
+
     $subscription = $service->subscription()->read($id);
     $this->view->sub = $subscription;
-    
+
     $products = $service->product()->listProducts();
     $prods = array();
-    
+
     // do a little preprocessing to group into families
     foreach ($products as $p)
     {
@@ -106,12 +106,12 @@ class SubscriptionsController extends ChargifyController
       }
     }
     $this->view->prods = $prods;
-    
+
     $this->view->headTitle('Edit Subscription');
-    
+
     $this->log($prods);
   }
-  
+
   /**
    * Change product with proration
    *
@@ -119,9 +119,9 @@ class SubscriptionsController extends ChargifyController
   public function migrateAction()
   {
     $id = $this->getRequest()->getParam('subscription-id');
-    
+
     $service = $this->_getChargify();
-    
+
     if ($this->getRequest()->isPost())
     {
       $sub = $service->subscription();
@@ -132,13 +132,13 @@ class SubscriptionsController extends ChargifyController
       }
       $sub->migrate($id);
     }
-    
+
     $subscription = $service->subscription()->read($id);
     $this->view->sub = $subscription;
-    
+
     $products = $service->product()->listProducts();
     $prods = array();
-    
+
     // do a little preprocessing to group into families
     foreach ($products as $p)
     {
@@ -149,29 +149,29 @@ class SubscriptionsController extends ChargifyController
       }
     }
     $this->view->prods = $prods;
-    
+
     $this->view->headTitle('Prorated Migration');
-    
+
     $this->log($prods);
   }
-  
+
   /**
    * Create a subscription
-   * 
+   *
    * Includes Zferral integration
    */
   public function createAction()
   {
     $this->_helper->layout()->setLayout('default');
-    
+
     /**
-     * Initialize Zferral. This gets populated below if Zferral is enabled 
+     * Initialize Zferral. This gets populated below if Zferral is enabled
      * and the subscription is successful.
      */
     $this->view->zferral = array();
-    
+
     $service = $this->_getChargify();
-    
+
     if ($this->getRequest()->isPost())
     {
       // @todo - allocate components at create time?
@@ -194,11 +194,11 @@ class SubscriptionsController extends ChargifyController
                   ))
                   ->setCouponCode($_POST['subscription']['coupon_code'])
                   ->create();
-      
+
       $this->log($s);
       //$this->log($s->isError());
       //$this->log($s->getErrors());
-      
+
       /**
        * Set up variables for the Zferral tracking pixel
        */
@@ -220,12 +220,12 @@ class SubscriptionsController extends ChargifyController
         }
       }
     }
-    
+
     $custs = $service->customer()->listCustomers();
     $this->view->custs = $custs;
-    
+
     $prods = $service->product()->listProducts();
-    
+
     $prodArray = array();
     // munge into nested array for creating optgroups
     foreach ($prods as $prod)
@@ -234,19 +234,19 @@ class SubscriptionsController extends ChargifyController
       $prodArray[$family][$prod['id']] = '(' . $prod['name'] . ')';
     }
     $this->view->prods = $prodArray;
-    
+
     $this->view->countries = $this->_getCountries();
     $this->view->states = $this->_getStates();
     $this->view->months = $this->_getMonths();
     $this->view->years = $this->_getYears();
-    
+
     $this->view->headTitle('Create Subscription');
-    
+
     $this->log($custs);
     $this->log($prods);
     $this->log($prodArray);
   }
-  
+
   /**
    * List subscriptions for your site
    *
@@ -254,32 +254,32 @@ class SubscriptionsController extends ChargifyController
   public function listAction()
   {
     $this->_helper->layout()->setLayout('default');
-    
+
     $page = $this->getRequest()->getParam('page', 1);
-    
+
     $service = $this->_getChargify();
-    
+
     $subs = $service->subscription()
                     ->setPage($page)
                     ->setPerPage(100)
                     ->listSubscriptions();
-    
+
     // set up hosted URLS
     $hosted_urls = array();
     foreach ($subs as $s)
     {
       $hosted_urls[$s['id']] = $this->view->hostedUrl($s['id']);
     }
-    
+
     $this->view->subs        = $subs;
     $this->view->hosted_urls = $hosted_urls;
-    
+
     $this->view->headTitle('List Subscriptions');
-    
+
     $this->log($subs);
     $this->log($hosted_urls);
   }
-  
+
   /**
    * Add Metered components to a subscription.
    */
@@ -287,9 +287,9 @@ class SubscriptionsController extends ChargifyController
   {
     $id = $this->getRequest()->getParam('subscription-id');
     $componentId = $this->getRequest()->getParam('component-id');
-    
+
     $service = $this->_getChargify();
-    
+
     if ($this->getRequest()->isPost())
     {
       $c = $service->component()
@@ -298,33 +298,33 @@ class SubscriptionsController extends ChargifyController
                     ->createUsage($id, $componentId);
       $this->log($c);
     }
-    
+
     $subscription = $service->subscription()->read($id);
     $this->view->sub = $subscription;
-    
+
     $comp = $service->component()->readSubscription($id, $componentId);
     $this->view->comp = $comp;
-    
+
     $this->view->headTitle('Create Metered Usage');
-    
+
     $this->log($subscription);
     $this->log($comp);
   }
-  
+
   /**
    * Toggle the on/off state of an on/off component
-   * 
-   * On/Off components are handled exactly the same as quantity-based 
+   *
+   * On/Off components are handled exactly the same as quantity-based
    * components, you are just setting the quantity to 1 for "on" or 0 for "off".
-   * 
+   *
    */
   public function componentOnOffAction()
   {
     $id = $this->getRequest()->getParam('subscription-id');
     $componentId = $this->getRequest()->getParam('component-id');
-    
+
     $service = $this->_getChargify();
-    
+
     if ($this->getRequest()->isPost())
     {
       $c = $service->component()
@@ -333,30 +333,30 @@ class SubscriptionsController extends ChargifyController
                    ->setQuantityAllocation($id, $componentId);
       $this->log($c);
     }
-    
+
     $subscription = $service->subscription()->read($id);
     $this->view->sub = $subscription;
-    
+
     $comp = $service->component()->readSubscription($id, $componentId);
     $this->view->comp = $comp;
-    
+
     $this->view->headTitle('Toggle On/Off');
-    
+
     $this->log($subscription);
     $this->log($comp);
   }
-  
+
   /**
    * Set Quantity-based allocations on a subscription
-   * 
+   *
    */
   public function componentAllocationAction()
   {
     $id = $this->getRequest()->getParam('subscription-id');
     $componentId = $this->getRequest()->getParam('component-id');
-    
+
     $service = $this->_getChargify();
-    
+
     if ($this->getRequest()->isPost())
     {
       $c = $service->component()
@@ -365,31 +365,31 @@ class SubscriptionsController extends ChargifyController
                    ->setQuantityAllocation($id, $componentId);
       $this->log($c);
     }
-    
+
     $subscription = $service->subscription()->read($id);
     $this->view->sub = $subscription;
-    
+
     $comp = $service->component()->readSubscription($id, $componentId);
     $this->view->comp = $comp;
-    
+
     $this->view->headTitle('New Quantity-based Allocation');
-    
+
     $this->log($subscription);
     $this->log($comp);
   }
-  
+
   /**
    * Edit payment profile for a subscription
-   * 
+   *
    * DO NOT ENTER REAL CREDIT CARD INFORMATION!!
    *
    */
   public function editPaymentProfileAction()
   {
     $id = $this->getRequest()->getParam('subscription-id');
-    
+
     $service = $this->_getChargify();
-    
+
     if ($this->getRequest()->isPost())
     {
       $service->subscription()
@@ -409,20 +409,20 @@ class SubscriptionsController extends ChargifyController
               ))
               ->update($id);
     }
-    
+
     $subscription = $service->subscription()->read($id);
-    
+
     $this->view->sub       = $subscription;
     $this->view->states    = $this->_getStates();
     $this->view->countries = $this->_getCountries();
     $this->view->months    = $this->_getMonths();
     $this->view->years     = $this->_getYears();
-    
+
     $this->view->headTitle('Edit Payment Profile');
-    
+
     $this->log($subscription);
   }
-  
+
   /**
    * Cancel a subscription
    *
@@ -430,14 +430,14 @@ class SubscriptionsController extends ChargifyController
   public function cancelAction()
   {
     $id = $this->getRequest()->getParam('subscription-id');
-    
+
     $service = $this->_getChargify();
-    
+
     if ($this->getRequest()->isPost())
     {
       $sub = $service->subscription();
       $sub->setCancellationMessage($_POST['subscription']['cancellation_message']);
-      
+
       if (isset($_POST['cancel_immediately']))
       {
         $sub->cancelImmediately($id);
@@ -447,15 +447,15 @@ class SubscriptionsController extends ChargifyController
         $sub->cancelDelayed($id);
       }
     }
-    
+
     $subscription = $service->subscription()->read($id);
     $this->view->sub = $subscription;
-    
+
     $this->view->headTitle('Cancel Subscription');
-    
+
     $this->log($subscription);
   }
-  
+
   /**
    * Re-activate a subscription
    *
@@ -463,27 +463,27 @@ class SubscriptionsController extends ChargifyController
   public function reactivateAction()
   {
     $id = $this->getRequest()->getParam('subscription-id');
-    
+
     $service = $this->_getChargify();
-    
+
     if ($this->getRequest()->isPost())
     {
       if (!empty($_POST['reset_balance']))
       {
         $service->subscription()->resetBalance($id);
       }
-      
+
       $service->subscription()->reactivate($id);
     }
-    
+
     $subscription = $service->subscription()->read($id);
     $this->view->sub = $subscription;
-    
+
     $this->view->headTitle('Reactivate Subscription');
-    
+
     $this->log($subscription);
   }
-  
+
   /**
    * Reset balance to 0.00 for a specific subscription
    *
@@ -491,20 +491,20 @@ class SubscriptionsController extends ChargifyController
   public function resetBalanceAction()
   {
     $id = $this->getRequest()->getParam('subscription-id');
-    
+
     $service = $this->_getChargify();
-    
+
     if ($this->getRequest()->isPost())
     {
       $service->subscription()->resetBalance($id);
     }
-    
+
     $subscription = $service->subscription()->read($id);
     $this->view->sub = $subscription;
-    
+
     $this->view->headTitle('Reset Balance');
-    
+
     $this->log($subscription);
   }
-  
+
 }

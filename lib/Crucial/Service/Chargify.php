@@ -6,17 +6,17 @@
  *
  * This source file is subject to the new BSD license that is bundled
  * with this package in the file LICENSE.txt.
- * 
+ *
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to dan@crucialwebstudio.com so we can send you a copy immediately.
- * 
+ *
  * @category Crucial
  * @package Crucial_Service_Chargify
  * @copyright Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)
  * @license New BSD License
  */
-class Crucial_Service_Chargify extends Zend_Service_Abstract 
+class Crucial_Service_Chargify extends Zend_Service_Abstract
 {
   /**
    * The complete hostname; e.g. "my-app-subdomain.chargify.com",
@@ -25,14 +25,14 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
    * @var string
    */
   protected $_hostname;
-  
+
   /**
    * Your api key
    *
    * @var string
    */
   protected $_apiKey;
-  
+
   /**
    * Your http authentication password. The password is always "x" but for now we're
    * accepting in in the $config
@@ -40,54 +40,54 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
    * @var string
    */
   protected $_password;
-  
+
   /**
    * xml or json
    *
    * @var string
    */
   protected $_format;
-  
+
   /**
    * Config used in constructor.
    *
    * @var Zend_Config|array
    */
   protected $_config;
-  
+
   /**
    * Initialize the service
-   * 
+   *
    * @param Zend_Config|array $config
    */
   public function __construct($config)
   {
     // store a copy
     $this->_config = $config;
-    
+
     if ($config instanceof Zend_Config)
     {
       $config = $config->toArray();
     }
-    
+
     $this->_hostname = $config['hostname'];
     $this->_apiKey   = $config['api_key'];
     $this->_password = $config['password'];
     $this->_format   = strtolower($config['format']);
-    
+
     // set up http client
     $client = self::getHttpClient();
-    
+
     $client->setConfig(array(
       'maxredirects' => 0,
       'timeout'      => 30,
       'keepalive'    => TRUE
     ));
-    
+
     // username, password for http authentication
     $client->setAuth($this->_apiKey, $this->_password, Zend_Http_Client::AUTH_BASIC);
   }
-  
+
   /**
    * xml or json
    *
@@ -97,7 +97,7 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   {
     return $this->_format;
   }
-  
+
   /**
    * Returns config sent in constructor
    *
@@ -107,7 +107,7 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   {
     return $this->_config;
   }
-  
+
   /**
    * Enter description here...
    *
@@ -119,48 +119,48 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
    */
   public function request($path, $method, $rawData = NULL, $params = NULL)
   {
-    
+
     $method = strtoupper($method);
     $client = self::getHttpClient();
-    
+
     $client->setUri('https://' . $this->_hostname . '/' . $path . '.' . $this->_format);
-    
+
     // unset headers. they don't get cleared between requests
     $client->setHeaders(array(
       'Content-Type' => NULL,
       'Accept'       => NULL
     ));
-    
+
     // clear parameters
     $client->resetParameters();
-    
+
     // set headers if POST or PUT
     if (in_array($method, array('POST', 'PUT')))
-    { 
+    {
       if (NULL === $rawData)
       {
         throw new Crucial_Service_Chargify_Exception('You must send raw data in a POST or PUT request');
       }
-      
+
       $client->setHeaders(array(
         'Content-Type' => 'application/' . $this->_format
       ));
-      
+
       if (!empty($params))
       {
-        $client->setParameterPost($params);
+        $client->setParameterGet($params);
       }
-      
+
       $client->setRawData($rawData, 'application/' . $this->_format);
     }
-    
+
     // set headers if GET or DELETE
     if (in_array($method, array('GET', 'DELETE')))
     {
       $client->setHeaders(array(
         'Accept' => 'application/' . $this->_format
       ));
-      
+
       if (!empty($params))
       {
         foreach ($params as $k => $v)
@@ -187,24 +187,26 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
         }
       }
     }
-    
+
     $response = $client->request($method);
-    
+    var_dump($client->getLastRequest());
+    var_dump($response);
+
     return $response;
   }
-  
+
   /**
    * Helper for instantiating an instance of Crucial_Service_Chargify_Customer
-   * 
+   *
    * @return Crucial_Service_Chargify_Customer
    */
   public function customer()
   {
     return new Crucial_Service_Chargify_Customer($this);
   }
-  
+
   /**
-   * Helper for instantiating an instance of 
+   * Helper for instantiating an instance of
    * Crucial_Service_Chargify_Subscription
    *
    * @return Crucial_Service_Chargify_Subscription
@@ -213,7 +215,7 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   {
     return new Crucial_Service_Chargify_Subscription($this);
   }
-  
+
   /**
    * Helper for instantiating an instance of Crucial_Service_Chargify_Product
    *
@@ -223,7 +225,7 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   {
     return new Crucial_Service_Chargify_Product($this);
   }
-  
+
   /**
    * Helper for instantiating an instance of Crucial_Service_Chargify_Adjustment
    *
@@ -233,7 +235,7 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   {
     return new Crucial_Service_Chargify_Adjustment($this);
   }
-  
+
   /**
    * Helper for instantiating an instance of Crucial_Service_Chargify_Charge
    *
@@ -243,7 +245,7 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   {
     return new Crucial_Service_Chargify_Charge($this);
   }
-  
+
   /**
    * Helper for instantiating an instance of Crucial_Service_Chargify_Component
    *
@@ -253,7 +255,7 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   {
     return new Crucial_Service_Chargify_Component($this);
   }
-  
+
   /**
    * Helper for instantiating an instance of Crucial_Service_Chargify_Coupon
    *
@@ -263,9 +265,9 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   {
     return new Crucial_Service_Chargify_Coupon($this);
   }
-  
+
   /**
-   * Helper for instantiating an instance of 
+   * Helper for instantiating an instance of
    * Crucial_Service_Chargify_Transaction
    *
    * @return Crucial_Service_Chargify_Transaction
@@ -274,7 +276,7 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   {
     return new Crucial_Service_Chargify_Transaction($this);
   }
-  
+
   /**
    * Helper for instantiating an instance of Crucial_Service_Chargify_Refund
    *
@@ -284,7 +286,7 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   {
     return new Crucial_Service_Chargify_Refund($this);
   }
-  
+
   /**
    * Helper for instantiating an instance of Crucial_Service_Chargify_Statement
    *
