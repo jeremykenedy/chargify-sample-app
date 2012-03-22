@@ -189,8 +189,6 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
     }
 
     $response = $client->request($method);
-    var_dump($client->getLastRequest());
-    var_dump($response);
 
     return $response;
   }
