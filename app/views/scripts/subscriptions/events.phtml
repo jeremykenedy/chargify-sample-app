@@ -1,0 +1,9 @@
+<div id="events_column">
+  <h1>Recent Activity</h1>
+  
+  <ul id="activity_feed">
+    <?php foreach ($this->events as $event): ?>
+      <li class=""><?php echo $event['message'] ?></li>
+    <?php endforeach; ?>
+  </ul>
+</div>

@@ -2,12 +2,13 @@
     <div class="bottom">
         <ul class="menu" id="tabs">
           <li class="<?php echo $this->activeTab('subscription_summary') ?>"><a href="/subscriptions/read/subscription-id/<?php echo $this->sub['id'] ?>"><span>Summary</span></a></li>
+          <li class="<?php echo $this->activeTab('subscription_events') ?>"><a href="/subscriptions/events/subscription-id/<?php echo $this->sub['id'] ?>"><span>Events</span></a></li>
           <li class="<?php echo $this->activeTab('subscription_components') ?>"><a href="/subscriptions/list-components/subscription-id/<?php echo $this->sub['id'] ?>"><span>Components (Line-Items)</span></a></li>
           <li class="<?php echo $this->activeTab('subscription_transactions') ?>"><a href="/transactions/for-subscription/subscription-id/<?php echo $this->sub['id'] ?>?page=1&per_page=20&kinds[]=charge&kinds[]=info&kinds[]=refund&kinds[]=payment&kinds[]=credit&kinds[]=payment_authorization&kinds[]=adjustment"><span>Transactions</span></a></li>
           <li class="<?php echo $this->activeTab('subscription_statements') ?>"><a href="/statements/list/subscription-id/<?php echo $this->sub['id'] ?>"><span>Statements</span></a></li>
           <li class="<?php echo $this->activeTab('subscription_reset_balance') ?>"><a href="/subscriptions/reset-balance/subscription-id/<?php echo $this->sub['id'] ?>"><span>Reset balance to $0</span></a></li>
         </ul>
-        
+
         <div class="button clearfix"> <a class="currency_link_small link-button-sm" href="/charges/add/subscription-id/<?php echo $this->sub['id'] ?>">Add a Charge</a> </div>
         <div class="button clearfix"> <a class="currency_link_small link-button-sm" href="/adjustments/create/subscription-id/<?php echo $this->sub['id'] ?>">Make a Balance Adjustment</a> </div>
         <div class="button clearfix"> <a class="currency_link_small link-button-sm" href="/refunds/create/subscription-id/<?php echo $this->sub['id'] ?>">Add a Refund</a> </div>

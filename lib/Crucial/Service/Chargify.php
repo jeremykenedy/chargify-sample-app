@@ -78,6 +78,9 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
     // set up http client
     $client = self::getHttpClient();
 
+    /**
+     * @todo should these be config options?
+     */
     $client->setConfig(array(
       'maxredirects' => 0,
       'timeout'      => 30,
@@ -134,6 +137,10 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
     // clear parameters
     $client->resetParameters();
 
+    $client->setHeaders(array(
+      'Content-Type' => 'application/' . $this->_format
+    ));
+
     // set headers if POST or PUT
     if (in_array($method, array('POST', 'PUT')))
     {
@@ -160,6 +167,11 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
       $client->setHeaders(array(
         'Accept' => 'application/' . $this->_format
       ));
+
+      if (!empty($rawData))
+      {
+        $client->setRawData($rawData, 'application/' . $this->_format);
+      }
 
       if (!empty($params))
       {
@@ -293,5 +305,15 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   public function statement()
   {
     return new Crucial_Service_Chargify_Statement($this);
+  }
+
+  /**
+   * Helper for instantiating an instance of Crucial_Service_Chargify_Event
+   *
+   * @return Crucial_Service_Chargify_Event
+   */
+  public function event()
+  {
+    return new Crucial_Service_Chargify_Event($this);
   }
 }

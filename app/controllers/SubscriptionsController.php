@@ -74,6 +74,24 @@ class SubscriptionsController extends ChargifyController
   }
 
   /**
+   * Get a list of events for the susbscription
+   */
+  public function eventsAction()
+  {
+    $id = $this->getRequest()->getParam('subscription-id');
+
+    $service = $this->_getChargify();
+
+    $sub = $service->subscription()->read($id);
+    $this->view->sub = $sub;
+
+    $events = $service->event()->forSubscription($id);
+    $this->view->events = $events;
+
+    $this->log($events);
+  }
+
+  /**
    * Change the product for a subscription without proration
    *
    */
