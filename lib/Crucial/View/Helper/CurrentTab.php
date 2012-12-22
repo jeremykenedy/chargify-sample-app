@@ -6,24 +6,24 @@
  *
  * This source file is subject to the new BSD license that is bundled
  * with this package in the file LICENSE.txt.
- * 
+ *
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to dan@crucialwebstudio.com so we can send you a copy immediately.
- * 
+ *
  * @category Crucial
  * @package Crucial_View_Helper
  * @copyright Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)
  * @license New BSD License
  */
-class Crucial_View_Helper_CurrentTab extends Zend_View_Helper_Abstract 
+class Crucial_View_Helper_CurrentTab extends Zend_View_Helper_Abstract
 {
   /**
    * Returns the string "current" if the give tab is the active one. An empty
    * string if not.
-   * 
-   * I know there is Zend_Navigation but it forces tight coupling of your tabs 
-   * to your modules/controllers/actions. I don't think navigation tabs should 
+   *
+   * I know there is Zend_Navigation but it forces tight coupling of your tabs
+   * to your modules/controllers/actions. I don't think navigation tabs should
    * enforce the structure of your application.
    *
    * @param string $tab
@@ -33,16 +33,16 @@ class Crucial_View_Helper_CurrentTab extends Zend_View_Helper_Abstract
   {
     // start out with empty class
     $class = '';
-    
+
     // determine what module/controller/action we're in
     $request    = Zend_Controller_Front::getInstance()->getRequest();
     $module     = $request->getModuleName();
     $controller = $request->getControllerName();
     $action     = $request->getActionName();
-    
+
     // set up a resource for easy checking against $tabs[$tab] array
     $resource = "$module/$controller/$action";
-    
+
     // set up array of tabs
     $tabs = array(
       'dashboard' => array(
@@ -73,7 +73,9 @@ class Crucial_View_Helper_CurrentTab extends Zend_View_Helper_Abstract
         'default/statements/read',
         'default/charges/add',
         'default/adjustments/create',
-        'default/refunds/create'
+        'default/refunds/create',
+        'default/direct/signup',
+        'default/direct/edit-payment-profile'
       ),
       'transactions' => array(
         'default/transactions/for-site'
@@ -90,13 +92,13 @@ class Crucial_View_Helper_CurrentTab extends Zend_View_Helper_Abstract
         'default/logs/read-postback'
       )
     );
-    
+
     // if the resource belongs to the $tabs[$tab] array, set the class to "current"
     if (in_array($resource, $tabs[$tab]))
     {
       $class = 'current';
     }
-    
+
     return $class;
   }
 }

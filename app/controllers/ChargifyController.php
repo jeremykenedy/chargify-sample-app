@@ -6,22 +6,22 @@
  *
  * This source file is subject to the new BSD license that is bundled
  * with this package in the file LICENSE.txt.
- * 
+ *
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to dan@crucialwebstudio.com so we can send you a copy immediately.
- * 
+ *
  * @category App
  * @package Controllers
  * @copyright Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)
  * @license New BSD License
  */
-class ChargifyController extends Zend_Controller_Action 
+class ChargifyController extends Zend_Controller_Action
 {
   /**
    * Create an instance of Crucial_Service_Chargify
-   * 
-   * Just a helper for making instantiation easier. Within a controller you can 
+   *
+   * Just a helper for making instantiation easier. Within a controller you can
    * simply call $service = $this->_getChargify() to get an instance.
    *
    * @return Crucial_Service_Chargify
@@ -31,10 +31,27 @@ class ChargifyController extends Zend_Controller_Action
   {
     $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/chargify.ini', APPLICATION_ENV);
     $service = new Crucial_Service_Chargify($config);
-    
+
     return $service;
   }
-  
+
+  /**
+   * Create an instance of Crucial_Service_ChargifyV2
+   *
+   * Just a helper for making instantiation easier. Within a controller you can
+   * simply call $service = $this->_getChargifyV2() to get an instance.
+   *
+   * @return Crucial_Service_ChargifyV2
+   * @example $service = $this->_getChargifyV2();
+   */
+  protected function _getChargifyV2()
+  {
+    $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/chargifyV2.ini', APPLICATION_ENV);
+    $service = new Crucial_Service_ChargifyV2($config);
+
+    return $service;
+  }
+
   /**
    * Log something to Firebug
    *
@@ -50,7 +67,7 @@ class ChargifyController extends Zend_Controller_Action
   public function log($message, $priority = NULL, $extras = NULL)
   {
     static $logger;
-    
+
     if (!$logger)
     {
       $logger = new Zend_Log();
@@ -61,13 +78,13 @@ class ChargifyController extends Zend_Controller_Action
     {
       $priority = Zend_Log::INFO;
     }
-    
+
     $logger->log($message, $priority, $extras);
   }
-  
+
   /**
    * Get an array of countries keyed by their abbreviation
-   * 
+   *
    * Helpful for creating select lists.
    *
    * @return array
@@ -284,10 +301,10 @@ class ChargifyController extends Zend_Controller_Action
     );
     return $countries;
   }
-  
+
   /**
    * Get an array of US states, keyed by their abbreviation
-   * 
+   *
    * Helpful for creating select lists.
    *
    * @return array
@@ -355,10 +372,10 @@ class ChargifyController extends Zend_Controller_Action
     );
     return $states;
   }
-  
+
   /**
    * Get an array of years
-   * 
+   *
    * Helpful for creating select lists.
    *
    * @param int $ahead
@@ -373,10 +390,10 @@ class ChargifyController extends Zend_Controller_Action
     $years = range($currentYear - $behind, $currentYear + $ahead);
     return array_combine($years, $years);
   }
-  
+
   /**
    * Get an array of months
-   * 
+   *
    * Helpful for creating select lists.
    *
    * @return array

@@ -1,0 +1,11 @@
+[GLOBAL]
+
+; xml or json
+format = "json"
+;format = "xml"
+
+[development : GLOBAL]
+
+api_id = "your api ID here"
+api_password = "your api password here"
+api_secret = "your api secret here"

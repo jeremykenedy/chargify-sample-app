@@ -12,40 +12,40 @@
  * to dan@crucialwebstudio.com so we can send you a copy immediately.
  *
  * @category Crucial
- * @package Crucial_Service_Chargify
+ * @package Crucial_Service_ChargifyV2
  * @copyright Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)
  * @license New BSD License
+ * @link http://www.crucialwebstudio.com
  */
-class Crucial_Service_Chargify extends Zend_Service_Abstract
+class Crucial_Service_ChargifyV2
 {
   /**
-   * The complete hostname; e.g. "my-app-subdomain.chargify.com",
-   * not just "my-app-subdomain"
+   * The base URL for all api calls. NO TRAILING SLASH!
    *
    * @var string
    */
-  protected $_hostname;
+  protected $_baseUrl = 'https://api.chargify.com/api/v2';
 
   /**
-   * Your http authentication password. The password is always "x".
+   * Your api_d
    *
    * @var string
    */
-  protected $_password = 'x';
+  protected $_apiId;
 
   /**
-   * Your api key
+   * Your api password
    *
    * @var string
    */
-  protected $_apiKey;
+  protected $_apiPassword;
 
   /**
-   * Shared key
+   * Secret key
    *
    * @var string
    */
-  protected $_sharedKey;
+  protected $_apiSecret;
 
   /**
    * xml or json
@@ -60,6 +60,13 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
    * @var Zend_Config|array
    */
   protected $_config;
+
+  /**
+   * Http client
+   *
+   * @var Zend_Http_Client
+   */
+  protected $_client;
 
   /**
    * Initialize the service
@@ -77,26 +84,60 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
     }
 
     // set individual properties
-    $this->_hostname  = $config['hostname'];
-    $this->_apiKey    = $config['api_key'];
-    $this->_sharedKey = $config['shared_key'];
-    $this->_format    = strtolower($config['format']);
+    $this->_apiId       = $config['api_id'];
+    $this->_apiPassword = $config['api_password'];
+    $this->_apiSecret   = $config['api_secret'];
+    $this->_format      = strtolower($config['format']);
 
     // set up http client
-    $client = self::getHttpClient();
+    $this->_client = new Zend_Http_Client();
 
     /**
      * @todo should these be config options?
      */
-    $client->setConfig(array(
+    $this->_client->setConfig(array(
       'maxredirects' => 0,
       'timeout'      => 30,
       'keepalive'    => TRUE,
-      'useragent'    => 'Crucial_Service_Chargify/1.0 (https://github.com/crucialwebstudio/Crucial_Service_Chargify)'
+      'useragent'    => 'Crucial_Service_ChargifyV2/1.0 (https://github.com/crucialwebstudio/Crucial_Service_Chargify)'
     ));
 
     // username, password for http authentication
-    $client->setAuth($this->_apiKey, $this->_password, Zend_Http_Client::AUTH_BASIC);
+    $this->_client->setAuth($this->_apiId, $this->_apiPassword, Zend_Http_Client::AUTH_BASIC);
+  }
+
+  /**
+   * Get the base URL for all requests made to the api.
+   *
+   * Does not contain a trailing slash.
+   *
+   * @return string
+   */
+  public function getBaseUrl()
+  {
+    return $this->_baseUrl;
+  }
+
+  /**
+   * Getter for api ID
+   *
+   * @return string
+   */
+  public function getApiId()
+  {
+    return $this->_apiId;
+  }
+
+  /**
+   * Getter for api secret.
+   *
+   * Be careful not to expose this to anyone, especially in your html.
+   *
+   * @return string
+   */
+  public function getApiSecret()
+  {
+    return $this->_apiSecret;
   }
 
   /**
@@ -120,6 +161,16 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   }
 
   /**
+   * Getter for $this->_client
+   *
+   * @return Zend_Http_Client
+   */
+  public function getClient()
+  {
+    return $this->_client;
+  }
+
+  /**
    * Send the request to Chargify
    *
    * @param string $path    URL path we are requesting such as: /subscriptions/<subscription_id>/adjustments
@@ -133,8 +184,8 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
     $method = strtoupper($method);
     $path = ltrim($path, '/');
 
-    $client = self::getHttpClient();
-    $client->setUri('https://' . $this->_hostname . '/' . $path . '.' . $this->_format);
+    $client = $this->getClient();
+    $client->setUri($this->_baseUrl . '/' . $path . '.' . $this->_format);
 
     // unset headers. they don't get cleared between requests
     $client->setHeaders(array(
@@ -214,114 +265,22 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
   }
 
   /**
-   * Helper for instantiating an instance of Crucial_Service_Chargify_Customer
+   * Helper for instantiating an instance of Crucial_Service_ChargifyV2_Direct
    *
-   * @return Crucial_Service_Chargify_Customer
+   * @return Crucial_Service_ChargifyV2_Direct
    */
-  public function customer()
+  public function direct()
   {
-    return new Crucial_Service_Chargify_Customer($this);
+    return new Crucial_Service_ChargifyV2_Direct($this);
   }
 
   /**
-   * Helper for instantiating an instance of
-   * Crucial_Service_Chargify_Subscription
+   * Helper for instantiating an instance of Crucial_Service_ChargifyV2_Call
    *
-   * @return Crucial_Service_Chargify_Subscription
+   * @return Crucial_Service_ChargifyV2_Call
    */
-  public function subscription()
+  public function call()
   {
-    return new Crucial_Service_Chargify_Subscription($this);
-  }
-
-  /**
-   * Helper for instantiating an instance of Crucial_Service_Chargify_Product
-   *
-   * @return Crucial_Service_Chargify_Product
-   */
-  public function product()
-  {
-    return new Crucial_Service_Chargify_Product($this);
-  }
-
-  /**
-   * Helper for instantiating an instance of Crucial_Service_Chargify_Adjustment
-   *
-   * @return Crucial_Service_Chargify_Adjustment
-   */
-  public function adjustment()
-  {
-    return new Crucial_Service_Chargify_Adjustment($this);
-  }
-
-  /**
-   * Helper for instantiating an instance of Crucial_Service_Chargify_Charge
-   *
-   * @return Crucial_Service_Chargify_Charge
-   */
-  public function charge()
-  {
-    return new Crucial_Service_Chargify_Charge($this);
-  }
-
-  /**
-   * Helper for instantiating an instance of Crucial_Service_Chargify_Component
-   *
-   * @return Crucial_Service_Chargify_Component
-   */
-  public function component()
-  {
-    return new Crucial_Service_Chargify_Component($this);
-  }
-
-  /**
-   * Helper for instantiating an instance of Crucial_Service_Chargify_Coupon
-   *
-   * @return Crucial_Service_Chargify_Coupon
-   */
-  public function coupon()
-  {
-    return new Crucial_Service_Chargify_Coupon($this);
-  }
-
-  /**
-   * Helper for instantiating an instance of
-   * Crucial_Service_Chargify_Transaction
-   *
-   * @return Crucial_Service_Chargify_Transaction
-   */
-  public function transaction()
-  {
-    return new Crucial_Service_Chargify_Transaction($this);
-  }
-
-  /**
-   * Helper for instantiating an instance of Crucial_Service_Chargify_Refund
-   *
-   * @return Crucial_Service_Chargify_Refund
-   */
-  public function refund()
-  {
-    return new Crucial_Service_Chargify_Refund($this);
-  }
-
-  /**
-   * Helper for instantiating an instance of Crucial_Service_Chargify_Statement
-   *
-   * @return Crucial_Service_Chargify_Statement
-   */
-  public function statement()
-  {
-    return new Crucial_Service_Chargify_Statement($this);
-  }
-
-  /**
-   * Helper for instantiating an instance of Crucial_Service_Chargify_Event
-   *
-   * @return Crucial_Service_Chargify_Event
-   */
-  public function event()
-  {
-    return new Crucial_Service_Chargify_Event($this);
+    return new Crucial_Service_ChargifyV2_Call($this);
   }
 }
