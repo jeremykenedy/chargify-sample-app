@@ -1,10 +1,10 @@
-- The Chargify logo and all graphics, html, css, javascript and other elements 
+- The Chargify logo and all graphics, html, css, javascript and other elements
   related to the user interface remain Copyright Chargify LLC.
 
-- Zend Framework and all other PHP code related to this application is subject 
+- Zend Framework and all other PHP code related to this application is subject
   to the New BSD License listed below.
 
----------------------------- New BSD License ----------------------------------- 
+---------------------------- New BSD License -----------------------------------
 
 Copyright (c) 2011, Crucial Web Studio
 All rights reserved.
@@ -19,8 +19,8 @@ are permitted provided that the following conditions are met:
       this list of conditions and the following disclaimer in the documentation
       and/or other materials provided with the distribution.
 
-    * Neither the name of Zend Technologies USA, Inc. nor the names of its
-      contributors may be used to endorse or promote products derived from this
+    * Neither the name of Crucial Web Studio, LLC nor the names of its
+      employees may be used to endorse or promote products derived from this
       software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
