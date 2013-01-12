@@ -337,4 +337,41 @@ class Crucial_Service_ChargifyV2_Direct
 
     return "$apiId\n$timestamp\n$nonce\n$data\n$signature\n";
   }
+
+  /**
+   * Check if Chargify Direct credentials are correct
+   *
+   * @return boolean
+   */
+  public function authTest()
+  {
+    $client = $this->getService()->getClient();
+    $client->setUri($this->getSignupAction());
+    $client->setParameterPost(array(
+      'secure' => array(
+        'api_id'    => $this->getApiId(),
+        'timestamp' => $this->getTimeStamp(),
+        'nonce'     => $this->getNonce(),
+        'signature' => $this->getRequestSignature()
+      )
+    ));
+
+    $response = $client->request(Zend_Http_Client::POST);
+    $body = trim($response->getBody());
+
+    $location = $response->getHeader('Location');
+
+    // if Chargify does not redirect return array of debug info
+    if (empty($location))
+    {
+      return FALSE;
+    }
+
+    /**
+     * Currently Chargify does not redirect at all if your credentials are wrong.
+     * It feels kind of wrong to simplly return TRUE based on that but that's the
+     * best test we have right now.
+     */
+    return TRUE;
+  }
 }

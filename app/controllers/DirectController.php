@@ -213,4 +213,12 @@ class DirectController extends ChargifyController
       $this->view->isSuccess = TRUE;
     }
   }
+
+  public function authTestAction()
+  {
+    $serviceV2 = $this->_getChargifyV2();
+    $direct = $serviceV2->direct();
+    $result = $direct->authTest();
+    $this->view->result = $result;
+  }
 }
