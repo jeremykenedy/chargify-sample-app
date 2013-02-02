@@ -1,0 +1,30 @@
+AddDefaultCharset utf-8
+
+# Disable directory browsing
+Options -Indexes
+
+#
+# Set APPLICATION_ENV
+#
+<IfModule mod_env.c>
+  SetEnv APPLICATION_ENV development
+</IfModule>
+
+#
+# Rewrite rules
+#
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Force HTTPS
+  # RewriteCond %{HTTPS} off
+  # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [NC,L]
+
+  # Standard rewrite to index.php
+  RewriteCond %{REQUEST_FILENAME} !-s
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteCond %{REQUEST_URI} !=/favicon.ico
+  RewriteRule ^.*$ index.php [NC,L]
+</IfModule>
