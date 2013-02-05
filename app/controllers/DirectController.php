@@ -85,11 +85,11 @@ class DirectController extends ChargifyController
     /**
      * Example query string after redirect
      *
-     * api_id=643c0f40-2d26-0130-27f0-026566abd2f9
-     * call_id=aede0389cc7fc3d344e5f07907e49d2c3c3875ea
-     * nonce=831398958abe9bccca1aebb2e506ad0c452d2bc1
+     * api_id=*****
+     * call_id=*****
+     * nonce=*****
      * result_code=4000
-     * signature=c813313869f92aeb8dfe9ed6280922fa62465777
+     * signature=*****
      * status_code=422
      * timestamp=1356143461
      */
