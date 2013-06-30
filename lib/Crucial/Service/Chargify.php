@@ -16,7 +16,7 @@
  * @copyright Copyright (c) 2011 Crucial Web Studio. (http://www.crucialwebstudio.com)
  * @license New BSD License
  */
-class Crucial_Service_Chargify extends Zend_Service_Abstract
+class Crucial_Service_Chargify
 {
   /**
    * The complete hostname; e.g. "my-app-subdomain.chargify.com",
@@ -81,10 +81,15 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
     $this->_apiKey    = $config['api_key'];
     $this->_sharedKey = $config['shared_key'];
     $this->_format    = strtolower($config['format']);
+  }
 
-    // set up http client
-    $client = self::getHttpClient();
-
+  /**
+   *
+   * @return Zend_Http_Client
+   */
+  protected function _getHttpClient()
+  {
+    $client = new Zend_Http_Client();
     /**
      * @todo should these be config options?
      */
@@ -92,11 +97,12 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
       'maxredirects' => 0,
       'timeout'      => 30,
       'keepalive'    => TRUE,
-      'useragent'    => 'Crucial_Service_Chargify/1.0 (https://github.com/crucialwebstudio/Crucial_Service_Chargify)'
+      'useragent'    => 'Crucial_Service_Chargify/1.1 (https://github.com/crucialwebstudio/Crucial_Service_Chargify)'
     ));
 
     // username, password for http authentication
     $client->setAuth($this->_apiKey, $this->_password, Zend_Http_Client::AUTH_BASIC);
+    return $client;
   }
 
   /**
@@ -126,14 +132,14 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
    * @param string $method  GET, POST, PUST, DELETE
    * @param string $rawData
    * @param array $params
-   * @return Zend_Http_Response
+   * @return Zend_Http_Response|FALSE Response object or FALSE if there was an exception during the request
    */
   public function request($path, $method, $rawData = NULL, $params = array())
   {
     $method = strtoupper($method);
     $path = ltrim($path, '/');
 
-    $client = self::getHttpClient();
+    $client = $this->_getHttpClient();
     $client->setUri('https://' . $this->_hostname . '/' . $path . '.' . $this->_format);
 
     // unset headers. they don't get cleared between requests
@@ -208,7 +214,14 @@ class Crucial_Service_Chargify extends Zend_Service_Abstract
       }
     }
 
-    $response = $client->request($method);
+    try
+    {
+      $response = $client->request($method);
+    }
+    catch (Exception $e)
+    {
+      return FALSE;
+    }
 
     return $response;
   }
